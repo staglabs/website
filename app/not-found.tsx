@@ -30,7 +30,7 @@ export default function NotFound() {
                             </h1>
 
                             <p
-                                className="ca-body-lg mt-6 max-w-[36rem]"
+                                className="ca-cover-lead mt-7 max-w-[36rem]"
                                 style={{ color: "rgba(255, 255, 255, 0.92)" }}
                             >
                                 The route you asked for does not exist. Head back

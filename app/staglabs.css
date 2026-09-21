@@ -187,6 +187,20 @@
     line-height: 1.5;
 }
 
+/*
+ * Intro copy sitting directly on cover photography.
+ *
+ * Plain body size and weight. Note the coupling: at 18px/400 this is WCAG
+ * "normal" text, so it needs 4.5:1 against the photo behind it — which is why
+ * the cover pool below runs as deep as it does. Bumping this to 24px, or to
+ * 18.66px+ bold, would make it "large" text at 3:1 and allow a lighter pool.
+ */
+.ca-cover-lead {
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
 .ca-sub {
     color: var(--ca-sub);
 }
@@ -275,13 +289,22 @@
     inset: 0;
     /* The cover photography is graded to the monochrome palette. Remove this
        rule to restore the original colour skies. */
-    filter: grayscale(1) contrast(1.06) brightness(0.8);
+    filter: grayscale(1) contrast(1.02) brightness(1.04);
 }
 
-/* Greyscaling lightens the sky behind white copy, so every cover carries a
-   scrim. Tuned by sampling the rendered pixels: the brightest background
-   behind the hero copy now sits near 108/255, which clears 4.5:1 against
-   white body text. Do not lighten this without re-measuring. */
+/*
+ * Text-over-photography scrim: a band, not a wash.
+ *
+ * hero-bg is brightest through the middle (band means top-to-bottom run
+ * 129/137/159/197/202), and the hero copy sits dead centre — on the brightest
+ * part of the photograph. A radial pool spread the darkening across the whole
+ * middle, which is what made the hero read as a heavy grey field.
+ *
+ * This keeps the top of the sky and the cloud band almost untouched and darkens
+ * only the strip the copy occupies. The depth is set by the copy, not by taste:
+ * 18px body text over a near-white cloud needs 4.5:1. Making `.ca-cover-lead`
+ * 24px, or 18.66px+ bold, would relax that to 3:1 and allow a lighter band.
+ */
 .ca-fill::after {
     content: "";
     position: absolute;
@@ -289,10 +312,55 @@
     pointer-events: none;
     background: linear-gradient(
         180deg,
-        rgb(0 0 0 / 0.45) 0%,
-        rgb(0 0 0 / 0.42) 45%,
-        rgb(0 0 0 / 0.5) 100%
+        rgb(0 0 0 / 0.04) 0%,
+        rgb(0 0 0 / 0.16) 24%,
+        rgb(0 0 0 / 0.46) 40%,
+        rgb(0 0 0 / 0.46) 62%,
+        rgb(0 0 0 / 0.22) 78%,
+        rgb(0 0 0 / 0.04) 92%,
+        rgb(0 0 0 / 0) 100%
     );
+}
+
+/*
+ * Ink-line artwork (the hero): a black ground with thin white line work.
+ *
+ * The scrim here is not about overall darkness — the ground is already black,
+ * which is 21:1 for white type — it is about the line work. A line crossing a
+ * glyph would eat the local contrast, so this dims the strokes behind the copy
+ * while leaving the black field untouched. It is effectively invisible.
+ */
+.ca-fill--ink::after {
+    background: linear-gradient(
+        180deg,
+        rgb(0 0 0 / 0.1) 0%,
+        rgb(0 0 0 / 0.3) 26%,
+        rgb(0 0 0 / 0.62) 42%,
+        rgb(0 0 0 / 0.62) 64%,
+        rgb(0 0 0 / 0.34) 80%,
+        rgb(0 0 0 / 0.1) 100%
+    );
+}
+
+/*
+ * Line art has no colour to remove and no tonality to protect. It is held well
+ * back instead: at full strength the white strokes compete with the type and the
+ * hero reads as two graphics fighting. At this opacity the strokes settle into
+ * a mid-grey texture on the black ground, so the headline stays the brightest
+ * thing in the frame.
+ *
+ * The ground must be forced black. The page sets a blue `data-band="day"`
+ * gradient behind every cover, which is invisible under an opaque photo but
+ * shows straight through a translucent one — that is what tinted this hero blue.
+ */
+.ca-page[data-fill="sky"] .ca-pc__inner[data-band="day"] .ca-fill.ca-fill--ink,
+.ca-fill--ink {
+    background: #000;
+}
+
+.ca-fill--ink img {
+    filter: none;
+    opacity: 0.32;
 }
 
 .ca-page[data-fill="sky"] .ca-pc__inner[data-band="day"] .ca-fill {

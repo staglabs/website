@@ -5,9 +5,9 @@ export function Hero() {
         <header id="top" className="ca-anchor">
             <section className="ca-pc ca-anchor">
                 <div className="ca-pc__inner" data-band="day" data-tone="dark">
-                    <div className="ca-fill" aria-hidden="true">
+                    <div className="ca-fill ca-fill--ink" aria-hidden="true">
                         <img
-                            src="/img/hero-bg.avif"
+                            src="/img/vlm31zh4gnn51.webp"
                             alt=""
                             loading="eager"
                             fetchPriority="high"
@@ -30,14 +30,11 @@ export function Hero() {
                             </h1>
 
                             <p
-                                className="ca-body-lg ca-hero-anim mt-6 max-w-[36rem]"
+                                className="ca-cover-lead ca-hero-anim mt-6 max-w-[34rem]"
                                 style={{ color: "rgba(255, 255, 255, 0.92)" }}
                             >
-                                Staglabs builds production software in tight,
-                                visible increments. You see working software
-                                early and often — the speed comes from the
-                                process, not from skipping the parts that keep
-                                it standing.
+                                Production software in tight, visible increments
+                                — shipped fast, and built to stay.
                             </p>
 
                             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
