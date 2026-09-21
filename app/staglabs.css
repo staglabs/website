@@ -1,0 +1,916 @@
+/* ===========================================================================
+   Staglabs landing — design system
+   Ported from the reference build. Scoped under `.ca-page` so it does not
+   leak into the rest of the site. Tokens, type scale, components, and motion
+   all live here.
+   ========================================================================= */
+
+@font-face {
+    font-family: "Libre Caslon Condensed";
+    src: url("/fonts/catalis/LibreCaslonCondensed-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Libre Caslon Condensed";
+    src: url("/fonts/catalis/LibreCaslonCondensed-Italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* -------------------------------------------------------------------- root */
+
+.ca-page {
+    /* --------------------------------------------------------------------
+       ACCENT — the whole accent system resolves from this block.
+
+       Currently MONOCHROME: the accent is ink, so blue only ever appears in
+       the cover photography (which is itself graded to greyscale).
+
+       TO RESTORE THE BLUE REFERENCE ACCENT, replace this group with:
+           --ca-accent: #2c7fd6;
+           --ca-accent-fg: #ffffff;
+           --ca-accent-grad: linear-gradient(180deg, #63a9ea 0%, #3b8adf 48%, #2472c8 100%);
+           --ca-accent-shadow: rgb(36 114 200 / 0.55);
+           --ca-accent-pulse: rgb(44 127 214 / 0.45);
+           --ca-accent-lift: rgb(141 178 255);
+       and drop the `.ca-fill img` greyscale rule below.
+    -------------------------------------------------------------------- */
+    --ca-accent: #131313;
+    --ca-accent-fg: #ffffff;
+    --ca-accent-grad: linear-gradient(180deg, #3f3f3f 0%, #1d1d1d 48%, #0b0b0b 100%);
+    --ca-accent-shadow: rgb(0 0 0 / 0.45);
+    --ca-accent-pulse: rgb(19 19 19 / 0.4);
+    --ca-accent-lift: rgb(198 198 198);
+
+    --ca-ink: #131313;
+    --ca-sub: #4c4c4c;
+    --ca-btn: #1d1d1d;
+    --ca-smoke: #f5f5f5;
+    --ca-table: #f3f3f3;
+    --ca-hairline: #efeff2;
+    --ca-badge-border: #00000014;
+    --ca-r-lg: 2rem;
+    --ca-r-md: 1.5rem;
+    --ca-r-sm: 0.5rem;
+    --ca-ease-swap: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ca-ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+    color: var(--ca-ink);
+    font-family: var(--font-roboto-ca), "Roboto", ui-sans-serif, system-ui, sans-serif;
+    background: rgb(255 255 255);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------- type */
+
+.ca-serif {
+    font-family: "Libre Caslon Condensed", "Times New Roman", serif;
+    font-weight: 400;
+}
+
+.ca-serif em,
+.ca-serif i {
+    font-style: italic;
+    font-weight: 400;
+}
+
+.ca-h1,
+.ca-stat {
+    letter-spacing: -0.18rem;
+    font-size: 4.5rem;
+    line-height: 1.1;
+}
+
+.ca-h2 {
+    letter-spacing: -0.16rem;
+    font-size: 4rem;
+    line-height: 1.2;
+}
+
+.ca-h3 {
+    letter-spacing: 0;
+    font-size: 3.5rem;
+    line-height: 1;
+}
+
+.ca-h4 {
+    letter-spacing: -0.06rem;
+    font-size: 3rem;
+    line-height: 1.2;
+}
+
+.ca-h5 {
+    letter-spacing: 0;
+    font-size: 2.5rem;
+    line-height: 1.2;
+}
+
+.ca-h6 {
+    letter-spacing: 0;
+    font-size: 2rem;
+    line-height: 1.25;
+}
+
+@media (max-width: 991px) {
+    .ca-h1,
+    .ca-stat {
+        font-size: 4rem;
+    }
+    .ca-h2 {
+        font-size: 3.5rem;
+    }
+    .ca-h3 {
+        font-size: 3rem;
+    }
+    .ca-h4 {
+        font-size: 2.75rem;
+    }
+    .ca-h5 {
+        font-size: 2.25rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .ca-h1,
+    .ca-stat {
+        font-size: 3.25rem;
+    }
+    .ca-h2 {
+        font-size: 3rem;
+    }
+    .ca-h3 {
+        font-size: 2.75rem;
+    }
+    .ca-h4 {
+        font-size: 2.5rem;
+    }
+    .ca-h5 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 479px) {
+    .ca-h1,
+    .ca-stat {
+        letter-spacing: -0.12rem;
+        font-size: 3rem;
+    }
+    .ca-h2 {
+        letter-spacing: -0.1rem;
+        font-size: 2.5rem;
+    }
+    .ca-h3 {
+        font-size: 2.5rem;
+    }
+    .ca-h4 {
+        font-size: 2rem;
+    }
+    .ca-h5 {
+        font-size: 1.75rem;
+    }
+}
+
+.ca-label {
+    letter-spacing: 0.075rem;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.33;
+}
+
+.ca-body-lg {
+    font-size: 1.125rem;
+    line-height: 1.5;
+}
+
+.ca-sub {
+    color: var(--ca-sub);
+}
+
+.ca-mono {
+    font-family: var(--font-robotomono-ca), ui-monospace, "SF Mono", monospace;
+}
+
+/* ------------------------------------------------------------------- layout */
+
+.ca-cm,
+.ca-cl,
+.ca-cx {
+    margin-inline: auto;
+    padding-inline: 3.25rem;
+}
+
+.ca-cm {
+    max-width: 67.5rem;
+}
+
+.ca-cl {
+    max-width: 86.5rem;
+}
+
+.ca-cx {
+    max-width: 93.5rem;
+}
+
+@media (max-width: 767px) {
+    .ca-cm,
+    .ca-cl,
+    .ca-cx {
+        padding-inline: 1.75rem;
+    }
+}
+
+@media (max-width: 479px) {
+    .ca-cm,
+    .ca-cl,
+    .ca-cx {
+        padding-inline: 1.25rem;
+    }
+}
+
+.ca-sec {
+    padding-block: 6rem;
+}
+
+@media (max-width: 767px) {
+    .ca-sec {
+        padding-block: 4.5rem;
+    }
+}
+
+.ca-anchor {
+    scroll-margin-top: 6.5rem;
+}
+
+/* ------------------------------------------------------------- page covers */
+
+.ca-pc {
+    padding: 0.75rem;
+}
+
+.ca-pc__inner {
+    border-radius: var(--ca-r-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.ca-pc__inner[data-tone="dark"] {
+    color: rgb(255 255 255);
+}
+
+.ca-fill {
+    position: absolute;
+    inset: 0;
+}
+
+.ca-fill img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    /* The cover photography is graded to the monochrome palette. Remove this
+       rule to restore the original colour skies. */
+    filter: grayscale(1) contrast(1.06) brightness(0.8);
+}
+
+/* Greyscaling lightens the sky behind white copy, so every cover carries a
+   scrim. Tuned by sampling the rendered pixels: the brightest background
+   behind the hero copy now sits near 108/255, which clears 4.5:1 against
+   white body text. Do not lighten this without re-measuring. */
+.ca-fill::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        180deg,
+        rgb(0 0 0 / 0.45) 0%,
+        rgb(0 0 0 / 0.42) 45%,
+        rgb(0 0 0 / 0.5) 100%
+    );
+}
+
+.ca-page[data-fill="sky"] .ca-pc__inner[data-band="day"] .ca-fill {
+    background:
+        radial-gradient(120% 55% at 50% 108%, rgb(255 255 255 / 0.75) 0%, rgb(255 255 255 / 0) 55%),
+        linear-gradient(rgb(60 138 208) 0%, rgb(80 153 218) 55%, rgb(168 204 235) 100%);
+}
+
+.ca-page[data-fill="sky"] .ca-pc__inner[data-band="dusk"] .ca-fill {
+    background:
+        radial-gradient(120% 80% at 50% 110%, rgb(122 148 205 / 0.55) 0%, rgb(122 148 205 / 0) 55%),
+        linear-gradient(rgb(28 52 103) 0%, rgb(36 64 124) 55%, rgb(59 95 168) 100%);
+}
+
+.ca-page[data-fill="sky"] .ca-pc__inner[data-band="night"] .ca-fill {
+    background:
+        radial-gradient(120% 70% at 50% 115%, rgb(56 82 140 / 0.6) 0%, rgb(56 82 140 / 0) 55%),
+        linear-gradient(rgb(5 15 40) 0%, rgb(8 29 73) 60%, rgb(20 52 110) 100%);
+}
+
+/* ------------------------------------------------------------------ buttons */
+
+.ca-acta {
+    isolation: isolate;
+    white-space: nowrap;
+    cursor: pointer;
+    background: rgb(255 255 255);
+    border: 0;
+    border-radius: 5rem;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.25rem 0.25rem 0.25rem 1.25rem;
+    text-decoration: none;
+    display: inline-flex;
+    position: relative;
+    overflow: hidden;
+}
+
+.ca-acta__bg {
+    border-radius: inherit;
+    background: var(--ca-accent-grad);
+    opacity: 0;
+    z-index: 0;
+    transition:
+        transform 0.55s cubic-bezier(0.19, 1, 0.22, 1),
+        opacity 0.55s cubic-bezier(0.19, 1, 0.22, 1);
+    position: absolute;
+    inset: 0;
+    transform: translate(100%);
+}
+
+.ca-acta__label {
+    z-index: 1;
+    color: var(--ca-ink);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    transition:
+        color 0.45s cubic-bezier(0.19, 1, 0.22, 1),
+        transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+    position: relative;
+}
+
+.ca-acta__chip {
+    z-index: 1;
+    background: var(--ca-accent-grad);
+    color: rgb(255 255 255);
+    border-radius: 50rem;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    transition: transform 0.55s cubic-bezier(0.19, 1, 0.22, 1);
+    display: inline-flex;
+    position: relative;
+    box-shadow:
+        rgb(255 255 255 / 0.4) 0 1px inset,
+        var(--ca-accent-shadow) 0 6px 14px -6px;
+}
+
+.ca-acta:hover .ca-acta__bg {
+    opacity: 1;
+    transform: translate(0);
+}
+
+.ca-acta:hover .ca-acta__label {
+    color: rgb(255 255 255);
+    transform: translate(4px);
+}
+
+.ca-acta:hover .ca-acta__chip {
+    transform: translate(-0.25rem);
+    box-shadow: rgb(255 255 255 / 0.4) 0 1px inset;
+}
+
+.ca-acta--dark {
+    background: var(--ca-btn);
+}
+
+.ca-acta--dark .ca-acta__label {
+    color: rgb(255 255 255);
+}
+
+.ca-acta:focus-visible {
+    outline-offset: 0.125rem;
+    outline: rgb(77 101 255) solid 0.125rem;
+}
+
+/* ------------------------------------------------------------------- pieces */
+
+.ca-pill {
+    border-radius: var(--ca-r-lg);
+    border: 1px solid var(--ca-badge-border);
+    white-space: nowrap;
+    background: none;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.9rem 0.3rem 0.45rem;
+    display: inline-flex;
+    overflow: hidden;
+}
+
+.ca-pill--glass {
+    color: rgb(255 255 255);
+    background: rgb(255 255 255 / 0.2);
+    border-color: rgb(255 255 255 / 0.25);
+}
+
+.ca-pill__star {
+    flex: 0 0 auto;
+    place-items: center;
+    display: grid;
+}
+
+.ca-pill__text {
+    display: inline-block;
+}
+
+.ca-glass {
+    border-radius: var(--ca-r-md);
+}
+
+.ca-glass--light {
+    color: var(--ca-ink);
+    background: rgb(255 255 255 / 0.55);
+    border: 1px solid rgb(255 255 255 / 0.65);
+}
+
+.ca-glass--dark {
+    color: rgb(255 255 255);
+    background: rgb(10 16 34 / 0.34);
+    border: 0.5px solid rgb(255 255 255 / 0.4);
+}
+
+.ca-card {
+    background: var(--ca-smoke);
+    border-radius: var(--ca-r-md);
+}
+
+.ca-card--white {
+    background: rgb(255 255 255);
+}
+
+.ca-chip {
+    border: 1px solid var(--ca-badge-border);
+    border-radius: var(--ca-r-lg);
+    color: var(--ca-accent);
+    letter-spacing: 0.075rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+    align-items: center;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.33;
+    display: inline-flex;
+}
+
+.ca-icircle {
+    background: var(--ca-accent);
+    color: rgb(255 255 255);
+    border-radius: 50%;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+}
+
+.ca-check {
+    background: var(--ca-accent);
+    color: rgb(255 255 255);
+    border-radius: 50%;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: grid;
+}
+
+.ca-check--ghost {
+    background: rgb(255 255 255 / 0.22);
+}
+
+.ca-dot {
+    background: var(--ca-accent);
+    border-radius: 50%;
+    flex: 0 0 auto;
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.ca-dot--pulse {
+    animation: ca-pulse 1.8s ease-in-out infinite;
+}
+
+.ca-glass--dark .ca-dot {
+    background: var(--ca-accent-lift);
+}
+
+@keyframes ca-pulse {
+    0%,
+    100% {
+        box-shadow: var(--ca-accent-pulse) 0 0;
+    }
+    50% {
+        box-shadow: transparent 0 0 0 6px;
+    }
+}
+
+.ca-console {
+    background: rgb(255 255 255);
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.ca-console__fade {
+    pointer-events: none;
+    background: linear-gradient(rgb(255 255 255 / 0), rgb(255 255 255));
+    height: 4rem;
+    position: absolute;
+    inset: auto 0 0;
+}
+
+.ca-status {
+    border-radius: var(--ca-r-lg);
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    display: inline-flex;
+    border: 1px solid transparent;
+}
+
+/* State is carried by fill and border rather than hue, so it survives a
+   monochrome palette: solid = done, outlined = in progress, muted = needs
+   a look. */
+
+/* Needs attention / awaiting approval. */
+.ca-status--amber {
+    color: var(--ca-ink);
+    background: var(--ca-table);
+    border-color: rgb(19 19 19 / 0.12);
+}
+
+/* In progress / drafted / settled. */
+.ca-status--blue {
+    color: var(--ca-ink);
+    background: transparent;
+    border-color: rgb(19 19 19 / 0.28);
+}
+
+/* Complete / passed / merged. */
+.ca-status--green {
+    color: var(--ca-accent-fg);
+    background: var(--ca-accent);
+}
+
+/* ---------------------------------------------------------------------- faq */
+
+.ca-faq {
+    background: var(--ca-smoke);
+    border-radius: var(--ca-r-md);
+}
+
+.ca-faq__q {
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    color: var(--ca-ink);
+    font: inherit;
+    background: none;
+    border: 0;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem 1.75rem;
+    font-weight: 500;
+    display: flex;
+}
+
+.ca-faq__icon {
+    background: var(--ca-accent);
+    color: rgb(255 255 255);
+    width: 2rem;
+    height: 2rem;
+    transition: transform 0.4s var(--ca-ease-out);
+    border-radius: 50%;
+    flex: 0 0 auto;
+    place-items: center;
+    display: grid;
+}
+
+.ca-faq.is-open .ca-faq__icon {
+    transform: rotate(45deg);
+}
+
+.ca-faq__body {
+    transition: grid-template-rows 0.4s var(--ca-ease-out);
+    grid-template-rows: 0fr;
+    display: grid;
+}
+
+.ca-faq.is-open .ca-faq__body {
+    grid-template-rows: 1fr;
+}
+
+.ca-faq__inner {
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* ---------------------------------------------------------------------- nav */
+
+.ca-nav {
+    inset-inline: 0;
+    z-index: 60;
+    position: fixed;
+    top: 0;
+}
+
+.ca-nav__space {
+    background: rgb(255 255 255);
+    height: 0.75rem;
+}
+
+.ca-nav__row {
+    justify-content: center;
+    display: flex;
+}
+
+.ca-nav__pillwrap {
+    position: relative;
+}
+
+.ca-nav__pill {
+    border-radius: 0 0 var(--ca-r-md) var(--ca-r-md);
+    background: rgb(255 255 255);
+    align-items: center;
+    gap: 1.25rem;
+    padding: 0.5rem 0.5rem 0.5rem 1.1rem;
+    display: flex;
+    box-shadow: rgb(0 0 0 / 0.25) 0 10px 30px -18px;
+}
+
+.ca-nav__corner {
+    color: rgb(255 255 255);
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 0;
+}
+
+.ca-nav__corner--l {
+    left: -24px;
+}
+
+.ca-nav__corner--r {
+    right: -24px;
+    transform: scaleX(-1);
+}
+
+.ca-nav__burger {
+    cursor: pointer;
+    background: none;
+    border: 0;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0.7rem 0.6rem;
+    display: none;
+}
+
+.ca-nav__burger span {
+    background: var(--ca-ink);
+    border-radius: 2px;
+    width: 20px;
+    height: 2px;
+    display: block;
+}
+
+@media (max-width: 900px) {
+    .ca-nav__segment,
+    .ca-nav__cta {
+        display: none;
+    }
+    .ca-nav__burger {
+        display: flex;
+    }
+}
+
+.ca-menu {
+    z-index: 70;
+    background: var(--ca-btn);
+    color: rgb(255 255 255);
+    flex-direction: column;
+    padding: 1.25rem 1.75rem 2.5rem;
+    display: flex;
+    position: fixed;
+    inset: 0;
+}
+
+.ca-menu__link {
+    color: rgb(255 255 255);
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    text-decoration: none;
+    display: flex;
+}
+
+.ca-menu__link .ca-dot {
+    background: var(--ca-accent);
+}
+
+/* -------------------------------------------------------------------- links */
+
+.ca-ilink {
+    color: var(--ca-accent);
+    text-underline-offset: 0.18em;
+    text-decoration-skip-ink: auto;
+    text-decoration: underline 0.06em;
+    transition: opacity 0.2s;
+}
+
+.ca-ilink:hover {
+    opacity: 0.7;
+}
+
+.ca-flink {
+    color: var(--ca-sub);
+    padding-bottom: 2px;
+    text-decoration: none;
+    transition: color 0.3s;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.ca-flink::after {
+    content: "";
+    background: var(--ca-btn);
+    height: 0.06rem;
+    transition: transform 0.4s var(--ca-ease-out);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translate(-101%);
+}
+
+.ca-flink:hover {
+    color: var(--ca-ink);
+}
+
+.ca-flink:hover::after {
+    transform: translate(0);
+}
+
+/* ----------------------------------------------------------------- wordmark */
+
+.ca-wordmark-clip {
+    overflow: hidden;
+}
+
+/*
+ * The oversized footer wordmark, rendered as canvas particles.
+ *
+ * `font-size: 13.5vw` is supplied by the component so the word keeps the exact
+ * scale and centred, full-bleed alignment of the static type it replaced
+ * (849px wide in a 1440px viewport).
+ *
+ * The band is 13vw tall because the component centres its glyph canvas
+ * vertically and never scales to fit height; at a 13.5vw font the drawn box
+ * works out at roughly 0.129x the viewport width, so a shorter band would clip
+ * the particles. `min-height: 0` overrides the component's 240px floor.
+ *
+ * The translate is what reproduces the original wordmark's bleed: the band is
+ * laid out at full glyph height, then pushed down so its lower edge falls
+ * outside the clipping parent — the same 0.14em drop the static type used.
+ */
+.ca-wordmark-particle {
+    min-height: 0;
+    height: max(5rem, 13vw);
+    transform: translateY(2.3vw);
+}
+
+/* ------------------------------------------------------------------- motion */
+
+.ca-page[data-anim="pending"] .ca-siv,
+.ca-page[data-anim="pending"] .ca-grow,
+.ca-page[data-anim="pending"] .ca-split-head,
+.ca-page[data-anim="pending"] .ca-tilt,
+.ca-page[data-anim="pending"] .ca-hero-anim {
+    visibility: hidden;
+}
+
+.ca-tilt--l {
+    transform: rotate(7deg);
+}
+
+.ca-tilt--r {
+    transform: rotate(-15deg);
+}
+
+.ca-hglass--l {
+    transform: rotate(-9.2deg);
+}
+
+.ca-hglass--r {
+    transform: rotate(12.14deg);
+}
+
+/* Per-word rise for display headings. Base text is always visible, so a
+   failed or disabled animation degrades to static text, never a blank head. */
+.ca-word {
+    display: inline-block;
+}
+
+.ca-split-head .ca-word,
+.ca-hero-anim .ca-word {
+    animation: ca-word-up 780ms var(--ca-ease-out) both;
+}
+
+@keyframes ca-word-up {
+    from {
+        transform: translateY(0.35em);
+        opacity: 0;
+    }
+    to {
+        transform: none;
+        opacity: 1;
+    }
+}
+
+/* Figure bars grow from the left. */
+.ca-figbar {
+    transform-origin: left;
+    animation: ca-bar-grow 900ms var(--ca-ease-out) both;
+}
+
+@keyframes ca-bar-grow {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ca-page .ca-acta__bg,
+    .ca-page .ca-acta__label,
+    .ca-page .ca-acta__chip,
+    .ca-page .ca-faq__body,
+    .ca-page .ca-faq__icon,
+    .ca-page .ca-flink,
+    .ca-page .ca-flink::after {
+        transition: none;
+    }
+
+    .ca-page .ca-acta:hover .ca-acta__bg {
+        opacity: 0;
+        transform: translate(100%);
+    }
+
+    .ca-page .ca-acta:hover .ca-acta__label {
+        color: var(--ca-ink);
+        transform: none;
+    }
+
+    .ca-page .ca-acta--dark:hover .ca-acta__label {
+        color: rgb(255 255 255);
+    }
+
+    .ca-page .ca-acta:hover .ca-acta__chip {
+        transform: none;
+    }
+
+    .ca-page .ca-dot--pulse {
+        animation: none;
+    }
+
+    .ca-page .ca-split-head .ca-word,
+    .ca-page .ca-hero-anim .ca-word,
+    .ca-page .ca-figbar {
+        animation: none;
+    }
+
+    .ca-page .ca-siv,
+    .ca-page .ca-grow,
+    .ca-page .ca-split-head,
+    .ca-page .ca-tilt,
+    .ca-page .ca-hero-anim {
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}

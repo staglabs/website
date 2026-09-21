@@ -1,128 +1,144 @@
-"use client";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { CaCta, CaSectionHead } from "@/components/staglabs/primitives";
+import { PageHero, PageShell } from "@/components/staglabs/page-shell";
 
-import ShinyText from "@/components/ui/shiny-text";
-import TiltedCard from "@/components/ui/tilted-card";
-import { motion } from "framer-motion";
-import { GithubIcon, HomeIcon, InfoIcon, LightbulbIcon, Link, MessageSquareIcon } from "lucide-react";
+export const metadata: Metadata = {
+    title: "About — Staglabs",
+    description:
+        "Staglabs is a software studio that designs, builds, and ships web products fast.",
+};
+
+const PRINCIPLES = [
+    {
+        tag: "SCOPE",
+        title: "Small scope first",
+        body: "We cut down to the smallest version that is genuinely useful, then ship that.",
+    },
+    {
+        tag: "PROOF",
+        title: "Working software",
+        body: "Progress is measured in what runs in production, not in what was planned.",
+    },
+    {
+        tag: "CYCLES",
+        title: "Short cycles",
+        body: "Build, review, adjust. Few moving parts, no long handoffs between layers.",
+    },
+];
+
+const TEAM = [
+    {
+        name: "Chirag Dave",
+        role: "Co-founder",
+        href: "/about/chirag",
+        body: "Builds the product surfaces and the systems behind them.",
+    },
+    {
+        name: "Ishan Patra",
+        role: "Co-founder",
+        href: "/about/ishan",
+        body: "Runs delivery: scope, cycles, and the checkpoints between them.",
+    },
+];
 
 export default function AboutPage() {
-    const navLinks = [
-        {
-            title: "Home",
-            icon: <HomeIcon className="h-full w-full text-white/80" />,
-            href: "/",
-        },
-        {
-            title: "About",
-            icon: <InfoIcon className="h-full w-full text-white/80" />,
-            href: "/about",
-        },
-        {
-            title: "Projects",
-            icon: <LightbulbIcon className="h-full w-full text-white/80" />,
-            href: "/#projects",
-        },
-        {
-            title: "Contact",
-            icon: <MessageSquareIcon className="h-full w-full text-white/80" />,
-            href: "/#contact",
-        },
-        {
-            title: "GitHub",
-            icon: <GithubIcon className="h-full w-full text-white/80" />,
-            href: "https://github.com/NgmiClub",
-        },
-    ];
-
     return (
-        <main className="relative min-h-screen bg-black text-white px-6 py-12 overflow-hidden">
-            <div className="sm:mt-16 max-w-4xl mx-auto">
-                <motion.h1
-                    className="text-4xl md:text-5xl font-bold mb-8"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    About
-                    <span className="text-4xl md:text-5xl ml-3 font-extrabold mb-4">
-                        <ShinyText
-                            text="NGMI"
-                            disabled={false}
-                            speed={3}
-                            className="text-4xl md:text-5xl font-extrabold mb-4"
-                        />
-                    </span>
-                </motion.h1>
+        <PageShell>
+            <PageHero
+                eyebrow="Staglabs / About"
+                lead="A software studio built for"
+                em="short runways"
+                intro="Staglabs is a software studio. We take a product idea and turn it into working, shipped software, quickly."
+            />
 
-                <motion.div
-                    className="space-y-6"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                >
-                    <p className="text-lg text-white/80">
-                        NGMI (Not Gonna Make It) is a platform dedicated to helping students and professionals navigate
-                        the challenging landscape of tech careers.
-                    </p>
+            <section id="principles" className="ca-anchor ca-sec">
+                <CaSectionHead
+                    eyebrow="01 · Principles"
+                    lead="How we"
+                    em="work"
+                    intro="Three habits that keep a short runway from turning into a long one."
+                />
 
-                    <p className="text-lg text-white/80">
-                        Our mission is to transform the "Not Gonna Make It" mindset into "Actually Made It" through
-                        AI-powered tools, resources, and community support.
-                    </p>
-
-                    <h2 className="text-2xl font-bold mt-12 mb-4">Our Vision</h2>
-                    <p className="text-lg text-white/80">
-                        We believe that with the right tools and guidance, everyone can overcome career obstacles and
-                        achieve their professional goals. Our AI-powered platform provides personalized insights and
-                        recommendations to help you make informed decisions about your career path.
-                    </p>
-
-                    <h2 className="text-2xl font-bold mt-12 mb-4">The Team</h2>
-                    <p className="text-lg text-white/80">
-                        NGMI was founded by a group of tech professionals who experienced firsthand the challenges of
-                        breaking into and advancing in the industry. Our diverse team brings together expertise in AI,
-                        career development, and educational technology.
-                    </p>
-
-                    <h2 className="text-2xl font-bold mt-20 mb-4 text-center">Founders</h2>
-                    <div className="flex flex-col sm:flex-row gap-20 sm:gap-40 items-center justify-center mt-10 mb-10">
-                        <a href="/about/chirag">
-                        <TiltedCard
-                            imageSrc="https://i.pinimg.com/736x/e0/db/af/e0dbaf44dba1c4922044c586aa3ef814.jpg"
-                            altText="Chirag"
-                            captionText="Chirag"
-                            containerHeight="300px"
-                            containerWidth="300px"
-                            imageHeight="300px"
-                            imageWidth="300px"
-                            rotateAmplitude={12}
-                            scaleOnHover={1.2}
-                            showMobileWarning={false}
-                            showTooltip={true}
-                            displayOverlayContent={true}
-                            overlayContent={<p className="tilted-card-demo-text">Chirag</p>}
-                        /></a>
-                        <a href="/about/ishan">
-                        <TiltedCard
-                            imageSrc="https://i.pinimg.com/736x/d1/69/39/d16939ff47c6b7b30743082ef2db5d30.jpg"
-                            altText="Ishan"
-                            captionText="Ishan"
-                            containerHeight="300px"
-                            containerWidth="300px"
-                            imageHeight="300px"
-                            imageWidth="300px"
-                            rotateAmplitude={12}
-                            scaleOnHover={1.2}
-                            showMobileWarning={false}
-                            showTooltip={true}
-                            displayOverlayContent={true}
-                            overlayContent={<p className="tilted-card-demo-text">Ishan</p>}
-                        />
-                        </a>
+                <div className="ca-cx mt-14">
+                    <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+                        {PRINCIPLES.map((item) => (
+                            <article
+                                key={item.title}
+                                className="ca-card flex flex-col p-6"
+                            >
+                                <span className="ca-chip self-start">
+                                    {item.tag}
+                                </span>
+                                <h3
+                                    className="ca-serif ca-h6 mt-5"
+                                    style={{ color: "var(--ca-ink)" }}
+                                >
+                                    {item.title}
+                                </h3>
+                                <p
+                                    className="mt-3 text-[0.92rem] leading-relaxed"
+                                    style={{ color: "var(--ca-sub)" }}
+                                >
+                                    {item.body}
+                                </p>
+                            </article>
+                        ))}
                     </div>
-                    
-                </motion.div>
-            </div>
-        </main>
+                </div>
+            </section>
+
+            <section id="team" className="ca-anchor ca-sec">
+                <CaSectionHead
+                    eyebrow="02 · Team"
+                    lead="Two people, one"
+                    em="lane"
+                    intro="Small on purpose. The people who scope the work are the people who build it."
+                />
+
+                <div className="ca-cx mt-14">
+                    <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                        {TEAM.map((person) => (
+                            <Link
+                                key={person.href}
+                                href={person.href}
+                                className="ca-card flex flex-col p-7"
+                                style={{ textDecoration: "none" }}
+                            >
+                                <span className="ca-chip self-start">
+                                    {person.role}
+                                </span>
+                                <h3
+                                    className="ca-serif ca-h5 mt-5"
+                                    style={{ color: "var(--ca-ink)" }}
+                                >
+                                    {person.name}
+                                </h3>
+                                <p
+                                    className="mt-3 text-[0.92rem] leading-relaxed"
+                                    style={{ color: "var(--ca-sub)" }}
+                                >
+                                    {person.body}
+                                </p>
+                                <span className="ca-ilink mt-6 text-[0.9rem]">
+                                    Profile ↗
+                                </span>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section className="ca-sec">
+                <div className="ca-cm flex flex-col items-center gap-5 text-center">
+                    <p className="ca-label" style={{ color: "var(--ca-sub)" }}>
+                        START A PROJECT
+                    </p>
+                    <CaCta href="/#outcomes" tone="dark">
+                        Start a project
+                    </CaCta>
+                </div>
+            </section>
+        </PageShell>
     );
 }

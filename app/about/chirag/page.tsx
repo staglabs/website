@@ -1,51 +1,36 @@
-"use client";
+import type { Metadata } from "next";
+import { TeamProfile, type TeamMember } from "@/components/staglabs/team-profile";
 
-import ShinyText from "@/components/ui/shiny-text";
-import { GithubIcon, GlobeIcon, LinkedinIcon } from "lucide-react";
+export const metadata: Metadata = {
+    title: "Chirag Dave — Staglabs",
+    description: "Chirag Dave is a co-founder of Staglabs.",
+};
 
-const chirag = {
-    name: "Chirag Dave",
-    image: "https://i.pinimg.com/736x/e0/db/af/e0dbaf44dba1c4922044c586aa3ef814.jpg",
-    bio: `Chirag is the co-founder of NGMI. Passionate about AI, education, and building tools for the next generation of tech talent. He believes in empowering others through technology and community.`,
-    socials: [
-        { icon: <GithubIcon className="w-5 h-5" />, url: "https://github.com/definitelynotchirag", label: "GitHub" },
-        {
-            icon: <LinkedinIcon className="w-5 h-5" />,
-            url: "https://linkedin.com/in/chirag-dave-751a91249",
-            label: "LinkedIn",
-        },
-        { icon: <GlobeIcon className="w-5 h-5" />, url: "https://chirag.ngmi.club", label: "Website" },
+const member: TeamMember = {
+    lead: "Chirag",
+    em: "Dave",
+    role: "Co-founder",
+    intro:
+        "Chirag is a co-founder of Staglabs, a software studio that builds and ships web products.",
+    bio: [
+        "Chirag is a co-founder of Staglabs, a software studio that builds and ships web products.",
+        "He works on the product side: interfaces, data models, and the systems that hold them up. The work is measured in what runs in production, not in what was planned.",
     ],
+    links: [
+        {
+            label: "GitHub",
+            url: "https://github.com/definitelynotchirag",
+            display: "github.com/definitelynotchirag",
+        },
+        {
+            label: "LinkedIn",
+            url: "https://linkedin.com/in/chirag-dave-751a91249",
+            display: "linkedin.com/in/chirag-dave-751a91249",
+        },
+    ],
+    sibling: { label: "Ishan Patra", href: "/about/ishan" },
 };
 
 export default function ChiragPage() {
-    return (
-        <main className="relative min-h-screen bg-black text-white px-6 py-12 overflow-hidden sm:mt-65">
-            <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center sm:gap-12 md:gap-12 ">
-                <img
-                    src={chirag.image}
-                    alt={chirag.name}
-                    className="object-cover rounded-xl mb-6 md:mb-0 shadow-lg border border-white/10 hover:scale-105 transition-all duration-300 sm:w-48 sm:h-48 md:w-64 md:h-64"
-                />
-                <div className="flex-1 text-center md:text-left">
-                    <ShinyText text={chirag.name} speed={2.5} className="text-4xl font-bold mb-2" />
-                    <p className="text-white/80 text-lg mb-4 sm:justify-center">{chirag.bio}</p>
-                    <div className="flex justify-center md:justify-start gap-5 mt-4">
-                        {chirag.socials.map(social => (
-                            <a
-                                key={social.label}
-                                href={social.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-all duration-200 text-white/80 hover:text-white"
-                            >
-                                {social.icon}
-                                <span className="hidden sm:inline text-sm font-medium">{social.label}</span>
-                            </a>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </main>
-    );
+    return <TeamProfile member={member} />;
 }

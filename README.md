@@ -1,155 +1,97 @@
-# NGMI (Not Gonna Make It)
+# Staglabs
 
-NGMI is a platform dedicated to helping students and professionals navigate the challenging landscape of tech careers. Our mission is to transform the "Not Gonna Make It" mindset into "Actually Made It" through AI-powered tools, resources, and community support.
+Staglabs is a software agency built for short runways: production software in
+tight, visible increments, without skipping the parts that keep it standing.
+This repository is the Staglabs marketing site — a Next.js 15 App Router app
+built with React 19, TypeScript, and Tailwind CSS 4. The landing page walks
+through proof, method, quality, outcomes, FAQ, and starting a project.
 
-## Table of Contents
+## Tech Stack
 
--   [About](#about)
--   [Features](#features)
--   [Project Structure](#project-structure)
--   [Getting Started](#getting-started)
--   [Scripts](#scripts)
--   [Dependencies](#dependencies)
--   [Contributing](#contributing)
--   [Contact](#contact)
--   [License](#license)
-
----
-
-## About
-
-NGMI (Not Gonna Make It) is a platform designed to empower users in their tech career journeys. We believe that with the right tools and guidance, everyone can overcome career obstacles and achieve their professional goals. Our AI-powered platform provides personalized insights and recommendations to help you make informed decisions about your career path.
-
-**Vision:**  
-Transforming "Not Gonna Make It" into "Actually Made It" for everyone in tech.
-
-**Team:**  
-Founded by tech professionals with experience in AI, career development, and educational technology.
-
----
-
-## Features
-
--   **Placement Predictor:**  
-    An AI-based tool that analyzes coding profiles to predict placement success, eligibility, and salary range.  
-    [Try it here](https://placements.ngmi.club)
-
--   **Upcoming Tools:**
-
-    -   AI Resume Analyzer
-    -   Internship Radar
-    -   Company Culture Detector
-
--   **Modern UI:**
-    -   Floating Dock navigation
-    -   Animated backgrounds and effects
-    -   Responsive design
-
----
+-   **Framework:** Next.js 15 (App Router) with React 19.
+-   **Language:** TypeScript 5.
+-   **Styling:** Tailwind CSS 4 via `@tailwindcss/postcss`, with design tokens
+    in `app/globals.css`.
+-   **Fonts and helpers:** `next/font` (Archivo, JetBrains Mono), plus `clsx`
+    and `tailwind-merge` in `lib/utils.ts`.
 
 ## Project Structure
 
 ```
-ngmi/
-  app/                # Next.js app directory (pages, layout, styles)
-  components/         # Reusable React components (UI, navigation, effects)
-  lib/                # Utility functions
-  public/             # Static assets (SVGs, images)
-  styles/             # Global and component styles (Tailwind CSS)
-  package.json        # Project metadata and scripts
-  tsconfig.json       # TypeScript configuration
+staglabs/
+    app/                        # App Router routes, root layout, global styles
+        page.tsx                # Landing page composition
+        layout.tsx              # Fonts, metadata, header and footer
+        globals.css             # Tailwind entry point and design tokens
+        about/                  # About pages (index, Chirag, Ishan)
+        opengraph-image.tsx     # Generated social share image
+        icon.svg                # Favicon
+    components/                 # site-header.tsx, site-footer.tsx
+    lib/                        # utils.ts class-name helper
+    public/                     # Static assets
+    DESIGN.md                   # Design direction and divergence constraints
+    next.config.ts              # Next.js configuration
+    postcss.config.mjs          # Tailwind CSS 4 PostCSS plugin
+    package.json                # Metadata and scripts
+    tsconfig.json               # TypeScript configuration
 ```
 
----
+`app/page.tsx` composes the landing page from six sections, in order: `proof`,
+`method`, `quality`, `outcomes`, `faq`, and `start`.
+
+Note that `package.json` also declares motion, 3D, and icon packages that the
+current pages do not import yet.
 
 ## Getting Started
 
-### Prerequisites
+Node.js and npm are required. No Node version is pinned in this repository —
+there is no `.nvmrc`, `.node-version`, or `engines` field.
 
--   Node.js (v18+ recommended)
--   npm, yarn, pnpm, or bun
+### Install
 
-### Installation
-
-1. Clone the repository:
+1. Clone the repository and enter it.
 
     ```bash
-    git clone https://github.com/yourusername/ngmi.git
-    cd ngmi
+    git clone <repository-url> staglabs
+    cd staglabs
     ```
 
-2. Install dependencies:
+2. Install dependencies. `package-lock.json` is committed, so use `npm ci` for
+   a clean install:
+
     ```bash
-    npm install
-    # or
-    yarn
-    # or
-    pnpm install
-    # or
-    bun install
+    npm ci
     ```
 
-### Running the Development Server
+    `npm install` also works, but may update the lockfile.
+
+### Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev      # development server on http://localhost:3000
+npm run build    # create the production build
+npm run start    # serve the production build
 ```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
-
----
 
 ## Scripts
 
--   `dev` – Start the development server with Turbopack
--   `build` – Build the production app
--   `start` – Start the production server
--   `lint` – Run ESLint
+| Script  | Command                | Description                                     |
+| ------- | ---------------------- | ----------------------------------------------- |
+| `dev`   | `next dev --turbopack` | Start the development server with Turbopack.    |
+| `build` | `next build`           | Create the optimized production build.          |
+| `start` | `next start`           | Serve the production build.                     |
+| `lint`  | `next lint`            | Lint the project — not runnable yet; see Notes. |
 
----
+## Notes
 
-## Dependencies
-
--   [Next.js](https://nextjs.org/) (v15+)
--   [React](https://react.dev/) (v19+)
--   [Framer Motion](https://www.framer.com/motion/)
--   [Three.js](https://threejs.org/)
--   [Tailwind CSS](https://tailwindcss.com/)
--   [Lucide React](https://lucide.dev/)
--   [@react-three/fiber](https://docs.pmnd.rs/react-three-fiber/getting-started/introduction)
--   [@tabler/icons-react](https://tabler.io/icons)
--   [TypeScript](https://www.typescriptlang.org/)
-
-See `package.json` for the full list.
-
----
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request.
-
----
-
-## Contact
-
-Have questions or want to collaborate?  
-Email: [contact@ngmi.club](mailto:contact@ngmi.club)
-
----
-
-## License
-
-This project is licensed under the MIT License.
-
----
-
-**Deploy on Vercel:**  
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+-   **Linting is not wired up.** There is no ESLint config file (`.eslintrc*`
+    or `eslint.config.*`) and no `eslint` dependency, so `npm run lint` prompts
+    interactively for a config and cannot run non-interactively. Set up ESLint
+    before relying on it in CI.
+-   **No environment variables are required.** The application reads no
+    `process.env` values, and `.env*` files are gitignored.
+-   **Design constraints live in `DESIGN.md`.** It documents the monochrome
+    palette and the divergence constraints for this site: a reference for craft
+    and pacing, not a layout to reproduce.
+-   **Private and unlicensed.** `package.json` sets `"private": true` and the
+    repository has no `LICENSE` file.
