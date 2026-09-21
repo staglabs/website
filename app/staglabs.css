@@ -873,12 +873,46 @@
 
 /* ------------------------------------------------------------------- motion */
 
-.ca-page[data-anim="pending"] .ca-siv,
-.ca-page[data-anim="pending"] .ca-grow,
-.ca-page[data-anim="pending"] .ca-split-head,
-.ca-page[data-anim="pending"] .ca-tilt,
-.ca-page[data-anim="pending"] .ca-hero-anim {
-    visibility: hidden;
+/*
+ * Scroll reveal.
+ *
+ * The `.ca-siv` / `.ca-grow` / `.ca-tilt` classes have been on these blocks all
+ * along, but this rule previously keyed off `data-anim="pending"`, which nothing
+ * in the codebase ever set — so the whole system was inert and every block was
+ * simply painted. `data-anim="on"` is now set by the ScrollReveal client
+ * component, and `data-anim-in` marks each block once it has entered the
+ * viewport.
+ *
+ * Keeping the switch in JS is the point: the server never renders either
+ * attribute, so with scripting off — or if hydration throws — no rule below
+ * ever matches and every block renders visible. Content cannot be stranded at
+ * opacity 0, which is the usual failure mode of CSS-first reveal systems.
+ *
+ * `.ca-tilt` is opacity-only on purpose. It carries a rotation in its own
+ * transform, and a translate here would overwrite it.
+ */
+.ca-page[data-anim="on"] .ca-siv,
+.ca-page[data-anim="on"] .ca-grow {
+    opacity: 0;
+    transform: translateY(1.15rem);
+    transition:
+        opacity 620ms var(--ca-ease-out),
+        transform 620ms var(--ca-ease-out);
+}
+
+.ca-page[data-anim="on"] .ca-tilt {
+    opacity: 0;
+    transition: opacity 620ms var(--ca-ease-out);
+}
+
+.ca-page[data-anim="on"] .ca-siv[data-anim-in],
+.ca-page[data-anim="on"] .ca-grow[data-anim-in] {
+    opacity: 1;
+    transform: none;
+}
+
+.ca-page[data-anim="on"] .ca-tilt[data-anim-in] {
+    opacity: 1;
 }
 
 .ca-tilt--l {
