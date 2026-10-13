@@ -6,6 +6,7 @@ import { ArrowUpRight } from "@/components/staglabs/icons";
 
 export const metadata: Metadata = {
     title: "About — Staglabs",
+    alternates: { canonical: "/about" },
     description:
         "Staglabs is a software studio that designs, builds, and ships web products fast.",
 };

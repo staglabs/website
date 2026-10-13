@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { CtaBand } from "@/components/staglabs/cta-band";
 import { FaqSection } from "@/components/staglabs/faq";
 import { Hero } from "@/components/staglabs/hero";
@@ -7,6 +8,10 @@ import { PageShell } from "@/components/staglabs/page-shell";
 import { QualitySection } from "@/components/staglabs/quality";
 import { QuoteBand } from "@/components/staglabs/quote";
 import { WorkSection } from "@/components/staglabs/work";
+
+export const metadata: Metadata = {
+    alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
     return (

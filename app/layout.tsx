@@ -8,6 +8,7 @@ import "./globals.css";
 import "@/components/staglabs/particle-text.css";
 import "@/components/staglabs/rubber-segment.css";
 import "./staglabs.css";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 const roboto = Roboto({
     subsets: ["latin"],
@@ -28,7 +29,8 @@ const description =
     "Staglabs is a software agency built for short runways. We build production software in tight, visible increments — fast shipping without skipping the parts that keep it standing.";
 
 export const metadata: Metadata = {
-    title,
+    metadataBase: new URL(SITE_URL),
+    title: { default: title, template: "%s" },
     description,
     icons: {
         icon: [{ url: "/icon.png", type: "image/png" }],
@@ -37,7 +39,8 @@ export const metadata: Metadata = {
     openGraph: {
         title,
         description,
-        siteName: "Staglabs",
+        siteName: SITE_NAME,
+        url: SITE_URL,
         locale: "en_US",
         type: "website",
     },
@@ -81,6 +84,23 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${roboto.variable} ${robotoMono.variable} antialiased`}>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "ProfessionalService",
+                            name: SITE_NAME,
+                            url: SITE_URL,
+                            description,
+                            logo: `${SITE_URL}/staglabs-mark.png`,
+                            founder: [
+                                { "@type": "Person", name: "Chirag Dave", url: "https://chirxg.is-a.dev" },
+                                { "@type": "Person", name: "Ishan Patra", url: "https://ishanpatra.com" },
+                            ],
+                        }),
+                    }}
+                />
                 {children}
             </body>
         </html>

@@ -3,6 +3,7 @@ import { TeamProfile, type TeamMember } from "@/components/staglabs/team-profile
 
 export const metadata: Metadata = {
     title: "Chirag Dave — Staglabs",
+    alternates: { canonical: "/about/chirag" },
     description: "Chirag Dave is a co-founder of Staglabs.",
 };
 
