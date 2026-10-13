@@ -796,7 +796,7 @@
 }
 
 .ca-menu__link .ca-dot {
-    background: var(--ca-accent);
+    background: rgb(255 255 255 / 0.55);
 }
 
 /* -------------------------------------------------------------------- links */
