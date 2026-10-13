@@ -20,7 +20,7 @@ export function CaLogo({
 }) {
     return (
         <img
-            src="/staglabs-mark.png"
+            src="/staglabs-mark-128.png"
             alt=""
             aria-hidden="true"
             width={size}
