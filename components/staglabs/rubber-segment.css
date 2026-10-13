@@ -102,6 +102,11 @@
     background: var(--rs-thumb);
     color: var(--rs-ink-active);
     pointer-events: none;
+    transition: opacity 200ms ease;
+}
+
+.rubber-segment__thumb[data-hidden] {
+    opacity: 0;
 }
 
 .rubber-segment[data-equal] .rubber-segment__thumb {

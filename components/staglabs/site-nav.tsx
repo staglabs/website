@@ -143,6 +143,7 @@ export function SiteNav() {
                                         label: link.label,
                                     }))}
                                     value={active}
+                                    hideThumb={pathname !== "/"}
                                     onChange={handleSectionChange}
                                     trackColor="transparent"
                                     thumbColor="var(--ca-ink)"

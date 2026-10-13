@@ -50,6 +50,8 @@ export type RubberSegmentProps = {
     glide?: number;
     draggable?: boolean;
     disabled?: boolean;
+    /** Fade the thumb out, for when no item represents the current state. */
+    hideThumb?: boolean;
     className?: string;
     "aria-label"?: string;
 };
@@ -129,6 +131,7 @@ export default function RubberSegment({
     glide = 75,
     draggable = true,
     disabled = false,
+    hideThumb = false,
     className = "",
     "aria-label": ariaLabel = "Segmented control",
 }: RubberSegmentProps) {
@@ -462,6 +465,7 @@ export default function RubberSegment({
             <motion.div
                 className="rubber-segment__thumb"
                 aria-hidden="true"
+                data-hidden={hideThumb ? "" : undefined}
                 style={{ clipPath }}
             >
                 {list.map((item) => (
