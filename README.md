@@ -49,6 +49,15 @@ domain is live. It defaults to the current sslip.io deployment.
   running.
 - Copy stays Staglabs' own. No invented client metrics or timelines.
 
+## Notes
+
+- **Linting is not wired up.** There is no ESLint config or `eslint`
+  dependency, so `npm run lint` prompts interactively and cannot run in CI.
+- **Environment:** the only variable read is the optional
+  `NEXT_PUBLIC_SITE_URL`. `.env*` files are gitignored.
+- **Private and unlicensed.** `package.json` sets `"private": true` and there
+  is no `LICENSE` file.
+
 ## Deployment
 
 Currently served from a single host behind Caddy:
