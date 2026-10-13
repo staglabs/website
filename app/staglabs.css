@@ -322,47 +322,6 @@
     );
 }
 
-/*
- * Ink-line artwork (the hero): a black ground with thin white line work.
- *
- * The scrim here is not about overall darkness — the ground is already black,
- * which is 21:1 for white type — it is about the line work. A line crossing a
- * glyph would eat the local contrast, so this dims the strokes behind the copy
- * while leaving the black field untouched. It is effectively invisible.
- */
-.ca-fill--ink::after {
-    background: linear-gradient(
-        180deg,
-        rgb(0 0 0 / 0.1) 0%,
-        rgb(0 0 0 / 0.3) 26%,
-        rgb(0 0 0 / 0.62) 42%,
-        rgb(0 0 0 / 0.62) 64%,
-        rgb(0 0 0 / 0.34) 80%,
-        rgb(0 0 0 / 0.1) 100%
-    );
-}
-
-/*
- * Line art has no colour to remove and no tonality to protect. It is held well
- * back instead: at full strength the white strokes compete with the type and the
- * hero reads as two graphics fighting. At this opacity the strokes settle into
- * a mid-grey texture on the black ground, so the headline stays the brightest
- * thing in the frame.
- *
- * The ground must be forced black. The page sets a blue `data-band="day"`
- * gradient behind every cover, which is invisible under an opaque photo but
- * shows straight through a translucent one — that is what tinted this hero blue.
- */
-.ca-page[data-fill="sky"] .ca-pc__inner[data-band="day"] .ca-fill.ca-fill--ink,
-.ca-fill--ink {
-    background: #000;
-}
-
-.ca-fill--ink img {
-    filter: none;
-    opacity: 0.32;
-}
-
 .ca-page[data-fill="sky"] .ca-pc__inner[data-band="day"] .ca-fill {
     background:
         radial-gradient(120% 55% at 50% 108%, rgb(255 255 255 / 0.75) 0%, rgb(255 255 255 / 0) 55%),

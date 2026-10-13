@@ -51,8 +51,8 @@ domain is live. It defaults to the current sslip.io deployment.
 
 ## Notes
 
-- **Linting is not wired up.** There is no ESLint config or `eslint`
-  dependency, so `npm run lint` prompts interactively and cannot run in CI.
+- **Linting:** `npm run lint` runs ESLint with the Next.js core-web-vitals and
+  TypeScript rules (`eslint.config.mjs`). It currently passes with no warnings.
 - **Environment:** the only variable read is the optional
   `NEXT_PUBLIC_SITE_URL`. `.env*` files are gitignored.
 - **Private and unlicensed.** `package.json` sets `"private": true` and there
