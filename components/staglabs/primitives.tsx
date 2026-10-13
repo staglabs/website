@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Fragment } from "react";
 import type { ReactNode } from "react";
+import { ArrowUpRight } from "./icons";
 
 /* --------------------------------------------------------------- brand mark */
 
@@ -114,7 +115,7 @@ export function CaCta({
             <span className="ca-acta__bg" aria-hidden="true" />
             <span className="ca-acta__label">{children}</span>
             <span className="ca-acta__chip" aria-hidden="true">
-                ↗
+                <ArrowUpRight />
             </span>
         </Link>
     );

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CaCta, CaSectionHead } from "@/components/staglabs/primitives";
 import { PageHero, PageShell } from "@/components/staglabs/page-shell";
+import { ArrowUpRight } from "@/components/staglabs/icons";
 
 export const metadata: Metadata = {
     title: "About — Staglabs",
@@ -121,7 +122,7 @@ export default function AboutPage() {
                                     {person.body}
                                 </p>
                                 <span className="ca-ilink mt-6 text-[0.9rem]">
-                                    Profile ↗
+                                    Profile <ArrowUpRight size={11} className="inline-block" />
                                 </span>
                             </Link>
                         ))}

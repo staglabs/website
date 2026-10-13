@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { CaCta, CaLogo } from "./primitives";
 import RubberSegment from "./rubber-segment";
 import { useLenis } from "./smooth-scroll";
+import { CloseMark } from "./icons";
 
 const NAV_LINKS = [
     { label: "Work", href: "/#work" },
@@ -210,7 +211,7 @@ export function SiteNav() {
                             className="cursor-pointer p-3 text-[1.1rem] leading-none"
                             style={{ color: "#ffffff" }}
                         >
-                            ✕
+                            <CloseMark />
                         </button>
                     </div>
 

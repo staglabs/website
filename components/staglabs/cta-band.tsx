@@ -1,4 +1,5 @@
 import { CaCta, CaEyebrow, CaWords } from "./primitives";
+import { CheckMark } from "./icons";
 
 type Feed = {
     title: string;
@@ -89,7 +90,7 @@ function TiltCard({ feed, side }: { feed: Feed; side: "l" | "r" }) {
                                 className="mt-px shrink-0 text-[0.72rem]"
                                 style={{ color: "var(--ca-accent)" }}
                             >
-                                ✓
+                                <CheckMark size={11} />
                             </span>
                             {item.text}
                         </li>

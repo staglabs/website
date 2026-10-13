@@ -1,5 +1,6 @@
 import { CaCta, CaSectionHead } from "./primitives";
 import { PageHero, PageShell } from "./page-shell";
+import { ArrowUpRight } from "./icons";
 
 export type TeamMember = {
     lead: string;
@@ -85,7 +86,7 @@ export function TeamProfile({ member }: { member: TeamMember }) {
                                         className="ca-mono text-[0.78rem]"
                                         style={{ color: "var(--ca-sub)" }}
                                     >
-                                        {link.display} ↗
+                                        {link.display} <ArrowUpRight size={10} className="inline-block align-baseline" />
                                     </span>
                                 </a>
                             </li>
