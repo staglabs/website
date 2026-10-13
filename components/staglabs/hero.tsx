@@ -6,12 +6,19 @@ export function Hero() {
             <section className="ca-pc ca-anchor">
                 <div className="ca-pc__inner" data-band="day" data-tone="dark">
                     <div className="ca-fill ca-fill--ink" aria-hidden="true">
-                        <img
-                            src="/img/vlm31zh4gnn51.webp"
-                            alt=""
-                            loading="eager"
-                            fetchPriority="high"
-                        />
+                        <picture>
+                            <source
+                                srcSet="/img/hero-wave.avif"
+                                type="image/avif"
+                            />
+                            <img
+                                src="/img/vlm31zh4gnn51.webp"
+                                alt=""
+                                loading="eager"
+                                fetchPriority="high"
+                                decoding="async"
+                            />
+                        </picture>
                     </div>
 
                     <div className="relative z-10">
