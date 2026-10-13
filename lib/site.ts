@@ -3,7 +3,7 @@
  * domain is live. The fallback is the current public deployment.
  */
 export const SITE_URL = (
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://staglabs.50-18-145-43.sslip.io"
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://staglabs.13-52-217-195.sslip.io"
 ).replace(/\/$/, "");
 
 export const SITE_NAME = "Staglabs";
