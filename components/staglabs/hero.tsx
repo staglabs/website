@@ -4,21 +4,15 @@ export function Hero() {
     return (
         <header id="top" className="ca-anchor">
             <section className="ca-pc ca-anchor">
-                <div className="ca-pc__inner" data-band="day" data-tone="dark">
-                    <div className="ca-fill ca-fill--ink" aria-hidden="true">
-                        <picture>
-                            <source
-                                srcSet="/img/hero-wave.avif"
-                                type="image/avif"
-                            />
-                            <img
-                                src="/img/vlm31zh4gnn51.webp"
-                                alt=""
-                                loading="eager"
-                                fetchPriority="high"
-                                decoding="async"
-                            />
-                        </picture>
+                <div className="ca-pc__inner" data-band="night" data-tone="dark">
+                    <div className="ca-fill" aria-hidden="true">
+                        <img
+                            src="/img/sky-night.avif"
+                            alt=""
+                            loading="eager"
+                            fetchPriority="high"
+                            decoding="async"
+                        />
                     </div>
 
                     <div className="relative z-10">

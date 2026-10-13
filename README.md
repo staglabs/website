@@ -28,7 +28,7 @@ npm run build && npm run start
 app/                  routes, layout, global CSS, staglabs.css (design system)
 components/staglabs/  one component per section, plus primitives and icons
 lib/site.ts           canonical URL, site name, sitemap routes
-public/img/           cover imagery (AVIF), hero wave (AVIF + WebP fallback)
+public/img/           cover imagery (AVIF), sky-night hero cover
 DESIGN.md             design system: tokens, type scale, motion, section order
 ```
 
