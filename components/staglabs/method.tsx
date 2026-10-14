@@ -264,7 +264,7 @@ export function MethodSection() {
                     <p className="ca-label" style={{ color: "var(--ca-sub)" }}>
                         EVERY PROJECT TRAVELS THE SAME FIVE CHECKPOINTS
                     </p>
-                    <CaCta href="/about" tone="dark">
+                    <CaCta href="/contact" tone="dark">
                         Start a project
                     </CaCta>
                 </div>

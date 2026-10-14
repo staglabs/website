@@ -34,7 +34,7 @@ export function HeroStartButton() {
             if (event.data?.type !== CLICK_MESSAGE) return;
             const frame = slot.current?.querySelector("iframe");
             if (!frame || event.source !== frame.contentWindow) return;
-            router.push("/about");
+            router.push("/contact");
         }
         window.addEventListener("message", onMessage);
         return () => window.removeEventListener("message", onMessage);
@@ -47,7 +47,7 @@ export function HeroStartButton() {
             ) : null}
             {/* The button needs scripting. Without it, offer a plain link. */}
             <noscript>
-                <CaCta href="/about" tone="dark">
+                <CaCta href="/contact" tone="dark">
                     Start a project
                 </CaCta>
             </noscript>

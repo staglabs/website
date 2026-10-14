@@ -234,7 +234,7 @@ export function QualitySection() {
                     >
                         FOUR GATES, EVERY PROJECT
                     </p>
-                    <CaCta href="/about" tone="dark">
+                    <CaCta href="/contact" tone="dark">
                         Start a project
                     </CaCta>
                 </div>
