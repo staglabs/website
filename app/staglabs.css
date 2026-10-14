@@ -927,6 +927,78 @@
     }
 }
 
+/*
+ * Scroll-linked motion. `ScrollMotion` writes --bp / --hp / --cp / --sp and sets
+ * `data-scroll-motion="on"` on the page; every rule here is gated on that
+ * attribute, so without JS or under reduced motion nothing below applies.
+ */
+
+/* Page progress hairline. `difference` keeps it visible on dark and light. */
+.ca-progress {
+    display: none;
+}
+
+.ca-page[data-scroll-motion="on"] .ca-progress {
+    display: block;
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 70;
+    height: 2px;
+    background: rgb(255 255 255);
+    mix-blend-mode: difference;
+    transform-origin: left center;
+    transform: scaleX(var(--sp, 0));
+    pointer-events: none;
+}
+
+/* Cover photography drifts against the scroll: slower than the page. */
+.ca-page[data-scroll-motion="on"] .ca-fill img {
+    transform: translate3d(0, calc((var(--bp, 0.5) - 0.5) * -9%), 0) scale(1.14);
+    will-change: transform;
+}
+
+/* Hero copy lifts and fades as the page leaves it. */
+.ca-page[data-scroll-motion="on"] .ca-hero-content {
+    transform: translate3d(0, calc(var(--hp, 0) * -3.5rem), 0);
+    opacity: calc(1 - var(--hp, 0) * 0.85);
+    will-change: transform, opacity;
+}
+
+/* The two feed cards travel with the scroll: they drift, and swing as they go. */
+.ca-page[data-scroll-motion="on"] .ca-tilt--l {
+    transform: translate3d(calc(var(--cp, 0) * 2.2rem), calc(var(--cp, 0) * 5.5rem), 0)
+        rotate(calc(7deg + var(--cp, 0) * -13deg));
+    will-change: transform;
+}
+
+.ca-page[data-scroll-motion="on"] .ca-tilt--r {
+    transform: translate3d(calc(var(--cp, 0) * -2.2rem), calc(var(--cp, 0) * -5.5rem), 0)
+        rotate(calc(-15deg + var(--cp, 0) * 14deg));
+    will-change: transform;
+}
+
+/*
+ * Headings: hold each word hidden until its heading arrives, then play the
+ * rise. The animation is removed (not paused) while waiting: a below-the-fold
+ * heading otherwise runs its animation at load, offscreen, and has nothing
+ * left to show when it is reached.
+ */
+.ca-page[data-anim="on"] .ca-split-head:not([data-anim-in]) .ca-word {
+    animation: none;
+    opacity: 0;
+    transform: translateY(0.35em);
+}
+
+/* Figure bars grow when their row arrives, not at page load. */
+.ca-page[data-anim="on"] .ca-siv:not([data-anim-in]) .ca-figbar {
+    animation-play-state: paused;
+}
+
+/* Cards in a row arrive as a cascade. */
+.ca-page[data-anim="on"] .ca-grow {
+    transition-delay: var(--stagger, 0ms);
+}
+
 @media (prefers-reduced-motion: reduce) {
     .ca-page .ca-acta__bg,
     .ca-page .ca-acta__label,

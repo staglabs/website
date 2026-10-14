@@ -15,7 +15,7 @@ export function Hero() {
                         />
                     </div>
 
-                    <div className="relative z-10">
+                    <div className="ca-hero-content relative z-10">
                         <div className="flex min-h-[calc(100svh-1.5rem)] flex-col items-center justify-center px-5 pt-28 pb-28 text-center sm:px-8">
                             <h1
                                 className="ca-serif ca-h1 ca-hero-anim max-w-[20ch] [text-wrap:balance]"

@@ -28,6 +28,32 @@ export function SiteNav() {
     const router = useRouter();
     const pathname = usePathname();
 
+    // While a nav click is driving the scroll, the spy is locked. Otherwise it
+    // re-targets the thumb to every section the page passes on the way, so a
+    // far jump makes the thumb stutter through each stop instead of gliding
+    // straight to the destination.
+    const spyLocked = useRef(false);
+    const lockTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+    function pickActiveFromViewport() {
+        const mid = window.innerHeight * 0.5;
+        let best: string | null = null;
+        for (const id of SECTION_IDS) {
+            const el = document.getElementById(id);
+            if (!el) continue;
+            const r = el.getBoundingClientRect();
+            if (r.top <= mid && r.bottom >= mid) best = id;
+        }
+        if (best) setActive(best);
+    }
+
+    function releaseSpy() {
+        clearTimeout(lockTimer.current);
+        if (!spyLocked.current) return;
+        spyLocked.current = false;
+        pickActiveFromViewport();
+    }
+
     // Scroll-spy: a thin band across the middle of the viewport. Whichever
     // section crosses it owns the thumb, so the marker tracks the page the way
     // the brand mark tracks a lane.
@@ -39,6 +65,7 @@ export function SiteNav() {
 
         const observer = new IntersectionObserver(
             (entries) => {
+                if (spyLocked.current) return;
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) setActive(entry.target.id);
                 });
@@ -47,7 +74,23 @@ export function SiteNav() {
         );
 
         sections.forEach((section) => observer.observe(section));
-        return () => observer.disconnect();
+
+        // The visitor taking the wheel or keys back ends the programmatic scroll.
+        const takeover = () => releaseSpy();
+        window.addEventListener("wheel", takeover, { passive: true });
+        window.addEventListener("touchstart", takeover, { passive: true });
+        window.addEventListener("keydown", takeover);
+        window.addEventListener("scrollend", takeover);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener("wheel", takeover);
+            window.removeEventListener("touchstart", takeover);
+            window.removeEventListener("keydown", takeover);
+            window.removeEventListener("scrollend", takeover);
+            clearTimeout(lockTimer.current);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname]);
 
     function handleSectionChange(id: string) {
@@ -57,10 +100,18 @@ export function SiteNav() {
             router.push(`/#${id}`);
             return;
         }
-        if (lenis) lenis.scrollTo(target, { offset: -96 });
-        else target.scrollIntoView({ behavior: "smooth", block: "start" });
-        window.history.pushState(null, "", `#${id}`);
+        spyLocked.current = true;
         setActive(id);
+        // Safety net: never leave the spy locked if no completion event fires.
+        clearTimeout(lockTimer.current);
+        lockTimer.current = setTimeout(releaseSpy, 3000);
+
+        if (lenis) {
+            lenis.scrollTo(target, { offset: -96, onComplete: releaseSpy });
+        } else {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        window.history.pushState(null, "", `#${id}`);
     }
 
     useEffect(() => {

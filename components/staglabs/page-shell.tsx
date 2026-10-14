@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { CaEyebrow, CaWords } from "./primitives";
+import { ScrollMotion } from "./scroll-motion";
 import { ScrollReveal } from "./scroll-reveal";
 import { SiteFooter } from "./site-footer";
 import { SiteNav } from "./site-nav";
@@ -14,6 +15,8 @@ export function PageShell({ children }: { children: ReactNode }) {
         <SmoothScroll>
             <div className="ca-page min-h-screen" data-fill="sky">
                 <ScrollReveal />
+                <ScrollMotion />
+                <div className="ca-progress" aria-hidden="true" />
                 <a
                     href="#main"
                     className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[80] focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:text-black"
