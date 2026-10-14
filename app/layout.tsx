@@ -7,6 +7,7 @@ import "./globals.css";
    staglabs.css comes last so its theme overrides win. */
 import "@/components/staglabs/particle-text.css";
 import "@/components/staglabs/rubber-segment.css";
+import "@/components/threeui/shaders/threeui.css";
 import "./staglabs.css";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 

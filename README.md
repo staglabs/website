@@ -27,6 +27,7 @@ npm run build && npm run start
 ```
 app/                  routes, layout, global CSS, staglabs.css (design system)
 components/staglabs/  one component per section, plus primitives and icons
+components/threeui/   vendored ThreeUI Get Started button (unmodified)
 lib/site.ts           canonical URL, site name, sitemap routes
 public/img/           cover imagery (AVIF), sky-night hero cover
 DESIGN.md             design system: tokens, type scale, motion, section order
@@ -48,6 +49,27 @@ domain is live. It defaults to the current sslip.io deployment.
 - Respect `prefers-reduced-motion`. Content must never depend on an animation
   running.
 - Copy stays Staglabs' own. No invented client metrics or timelines.
+
+## ThreeUI Get Started button
+
+The hero "Start a project" control is ThreeUI's `GetStartedButton`. Its three
+registered files live unmodified in `components/threeui/` (SHA-256 identical to
+the published bundle at `threeui.com/source-code/get-started-button.json`).
+Everything this project changes is in two strict build-time loaders, so an
+upstream update that moves any adapted token fails the build instead of
+silently shipping:
+
+- `lib/threeui-source-loader.js`: transparent background, "START" label, the
+  frame size contract, and a click bridge (the button runs in a sandboxed
+  iframe that cannot navigate the page).
+- `lib/threeui-css-loader.js`: drops one `@font-face` for a font file the
+  bundle does not ship.
+- `components/staglabs/hero-start-button.tsx` receives the click and routes to
+  `/about`, accepting messages only from its own iframe.
+
+Limits: the embedded Geist Mono subset contains A-Z only, so the label is
+"START" rather than "Start a project" (15 characters would not fit anyway). The
+button needs WebGL 2 and JavaScript. Without JavaScript a plain link is shown.
 
 ## Notes
 

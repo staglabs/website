@@ -933,6 +933,44 @@
  * attribute, so without JS or under reduced motion nothing below applies.
  */
 
+/*
+ * Hero Start button slot. The slot keeps the layout footprint of the pill
+ * (826 x 380 design units). The frame is taller (826 x 780) and centred on the
+ * slot, extending 200 units above and below so the button's drop shadow is not
+ * cut off at the frame edge. Both boxes share the loader's `--u` contract.
+ * The ThreeUI wrapper paints an opaque #222225 on itself and its iframe inline,
+ * and clips overflow; all three are cleared here because the slot sits over the
+ * hero photograph.
+ */
+.ca-page .ca-hero-start {
+    position: relative;
+    width: min(20rem, 82vw);
+    aspect-ratio: 826 / 380;
+}
+
+.ca-page .ca-hero-start .get-started-button {
+    position: absolute !important;
+    inset: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+}
+
+.ca-page .ca-hero-start iframe {
+    position: absolute !important;
+    inset: auto !important;
+    left: 0 !important;
+    width: 100% !important;
+    top: calc(-200 / 380 * 100%) !important;
+    height: calc(780 / 380 * 100%) !important;
+    background: transparent !important;
+    /* Nothing paints above the pill except a faint halo, and a frame captures
+       pointer events across its whole rectangle, transparent parts included.
+       Cutting the top 214 of 780 units (the pill starts at 274, so 60 units of
+       halo room remain) stops it covering the paragraph above. clip-path clips
+       hit-testing as well as painting. The bottom stays whole for the shadow. */
+    clip-path: inset(calc(214 / 780 * 100%) 0 0 0);
+}
+
 /* Page progress hairline. `difference` keeps it visible on dark and light. */
 .ca-progress {
     display: none;

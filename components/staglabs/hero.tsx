@@ -1,3 +1,4 @@
+import { HeroStartButton } from "./hero-start-button";
 import { CaCta, CaWords } from "./primitives";
 
 export function Hero() {
@@ -39,9 +40,7 @@ export function Hero() {
                             </p>
 
                             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                                <CaCta href="/about" tone="dark">
-                                    Start a project
-                                </CaCta>
+                                <HeroStartButton />
                                 <CaCta href="/#method">How we ship</CaCta>
                             </div>
                         </div>
