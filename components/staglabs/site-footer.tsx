@@ -21,7 +21,7 @@ export function SiteFooter() {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="ca-anchor pt-20" style={{ background: "#ffffff" }}>
+        <footer data-mood="sleeping" className="ca-anchor pt-20" style={{ background: "#ffffff" }}>
             <div className="ca-cl">
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr]">
                     <div className="max-w-[26rem]">

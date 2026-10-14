@@ -171,7 +171,7 @@ const STEPS: Step[] = [
 
 export function MethodSection() {
     return (
-        <section id="method" className="ca-anchor ca-sec">
+        <section id="method" className="ca-anchor ca-sec" data-mood="working">
             <CaSectionHead
                 eyebrow="02 · Method"
                 lead="From brief to"

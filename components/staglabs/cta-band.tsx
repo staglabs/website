@@ -103,7 +103,7 @@ function TiltCard({ feed, side }: { feed: Feed; side: "l" | "r" }) {
 
 export function CtaBand() {
     return (
-        <section className="ca-pc ca-anchor">
+        <section className="ca-pc ca-anchor" data-mood="celebrate">
             <div className="ca-pc__inner" data-band="day" data-tone="dark">
                 <div className="ca-fill" aria-hidden="true">
                     <img src="/img/bookend-sky.avif" alt="" loading="lazy" />

@@ -3,7 +3,7 @@ import { CaCta, CaWords } from "./primitives";
 
 export function Hero() {
     return (
-        <header id="top" className="ca-anchor">
+        <header id="top" className="ca-anchor" data-mood="idle">
             <section className="ca-pc ca-anchor">
                 <div className="ca-pc__inner" data-band="night" data-tone="dark">
                     <div className="ca-fill" aria-hidden="true">

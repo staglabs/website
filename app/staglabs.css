@@ -971,6 +971,49 @@
     clip-path: inset(calc(214 / 780 * 100%) 0 0 0);
 }
 
+/*
+ * Mascot: a small fixed companion. Chrome-grey body, so it gets a soft contact
+ * shadow to lift it off white sections the way the Start button lifts off the
+ * hero. The wrapper only takes pointer events on the avatar itself.
+ */
+.ca-mascot {
+    position: fixed;
+    right: clamp(0.75rem, 2vw, 1.5rem);
+    bottom: clamp(0.75rem, 2vw, 1.5rem);
+    z-index: 50;
+    width: clamp(3.25rem, 6vw, 4.5rem);
+    aspect-ratio: 1;
+    display: grid;
+    cursor: pointer;
+    filter: drop-shadow(0 0.4rem 0.7rem rgb(0 0 0 / 0.28));
+    transition: transform 0.35s var(--ca-ease-out);
+}
+
+.ca-mascot > .bs-avatar {
+    width: 100%;
+    height: 100%;
+}
+
+.ca-mascot:hover {
+    transform: translateY(-0.15rem) scale(1.06);
+}
+
+.ca-mascot:active {
+    transform: scale(0.96);
+}
+
+/*
+ * Below desktop widths the FAQ rows and cards run to the right edge, exactly
+ * where the mascot sits, and a fixed element on top of them swallows taps. It
+ * becomes decorative-only there: it still animates with the section, but every
+ * pointer event passes through to the page underneath.
+ */
+@media (max-width: 1023px) {
+    .ca-mascot {
+        pointer-events: none;
+    }
+}
+
 /* Page progress hairline. `difference` keeps it visible on dark and light. */
 .ca-progress {
     display: none;

@@ -28,6 +28,7 @@ npm run build && npm run start
 app/                  routes, layout, global CSS, staglabs.css (design system)
 components/staglabs/  one component per section, plus primitives and icons
 components/threeui/   vendored ThreeUI Get Started button (unmodified)
+components/avatar/    avatar mascot (themed Strobi) and its lazy loader
 lib/site.ts           canonical URL, site name, sitemap routes
 public/img/           cover imagery (AVIF), sky-night hero cover
 DESIGN.md             design system: tokens, type scale, motion, section order
@@ -70,6 +71,34 @@ silently shipping:
 Limits: the embedded Geist Mono subset contains A-Z only, so the label is
 "START" rather than "Start a project" (15 characters would not fit anyway). The
 button needs WebGL 2 and JavaScript. Without JavaScript a plain link is shown.
+
+## Avatar mascot
+
+A small fixed companion ("Strobi") from `@bible-strong/avatar-react`, pinned to
+exactly `0.1.0`. Installed with `--ignore-scripts` after reading both tarballs:
+no install scripts, no network, `eval` or `process` access in the shipped code,
+and the installed files are identical to the audited ones.
+
+- `components/avatar/strobi.avatar.json`: the sample definition from the
+  package author's repo, unmodified.
+- `lib/avatar-theme.ts`: recolours a definition. It writes colour fields only,
+  so geometry, expressions and timings are the author's. The palette is chrome
+  grey, picked by rendering four monochrome candidates on white, ink and grey.
+- `components/avatar/mascot.tsx`: the section in the middle of the viewport sets
+  the animation through a `data-mood` attribute on that section (hero idle,
+  work curious, method working, quality proud, outcomes excited, FAQ thinking,
+  quote happy, CTA celebrate, footer sleeping). Hover is surprised and a click
+  laughs for a few seconds.
+- `components/avatar/mascot-loader.tsx`: the library validates its JSON in the
+  browser with a full schema validator (about 190 KB). It is loaded on the
+  visitor's first scroll, pointer move, touch or key press, or 6 seconds after
+  load, so it never competes with the page. Measured against the build without
+  it, the deferred version matches on Lighthouse performance and blocking time.
+- Below 1024px it is click-through, because it otherwise covers FAQ rows.
+- It is `aria-hidden` and has no keyboard action: it is decoration.
+
+**Licence:** the avatar packages are `AGPL-3.0-only`. Confirm that is acceptable
+for this site before shipping it publicly.
 
 ## Notes
 
