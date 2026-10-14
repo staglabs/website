@@ -994,49 +994,194 @@
 }
 
 /*
- * Mascot: a small fixed companion. Chrome-grey body, so it gets a soft contact
- * shadow to lift it off white sections the way the Start button lifts off the
- * hero. The wrapper only takes pointer events on the avatar itself.
+ * Travelling mascot. `.ca-roam` is a zero-size fixed layer; the mascot inside is
+ * moved with a transform (set from JS, one spring per frame) so nothing here
+ * triggers layout. The bubble is a child of the mascot, positioned relative to
+ * it, so it travels with it for free.
+ *
+ * The layer never captures pointer events. Only the mascot itself does, and only
+ * on devices with a hover pointer, so it can never swallow a tap meant for a
+ * button or form field underneath.
  */
-.ca-mascot {
+.ca-roam {
     position: fixed;
-    right: clamp(0.75rem, 2vw, 1.5rem);
-    bottom: clamp(0.75rem, 2vw, 1.5rem);
-    z-index: 50;
-    width: clamp(3.25rem, 6vw, 4.5rem);
-    aspect-ratio: 1;
+    inset: 0;
+    z-index: 55;
+    pointer-events: none;
+}
+
+.ca-roam__mascot {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4rem;
+    height: 4rem;
+    pointer-events: none;
+    will-change: transform;
+    transition:
+        opacity 0.25s var(--ca-ease-out),
+        visibility 0s linear 0s;
+}
+
+/* Hidden while there is nothing on screen to land beside. */
+.ca-roam__mascot[data-hidden="1"] {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none !important;
+    transition:
+        opacity 0.25s var(--ca-ease-out),
+        visibility 0s linear 0.25s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .ca-roam__mascot {
+        pointer-events: auto;
+        cursor: pointer;
+    }
+}
+
+.ca-roam__body {
+    width: 100%;
+    height: 100%;
     display: grid;
-    cursor: pointer;
-    /* A hairline edge first, then the soft contact shadow. The chrome body is
-       only about 1.7:1 against white, so without the edge it dissolves into the
-       light sections. */
+    /* A hairline edge, then a soft contact shadow. The chrome body is only about
+       1.7:1 against white, so without the edge it dissolves into light sections. */
     filter: drop-shadow(0 0 0.6px rgb(0 0 0 / 0.55))
         drop-shadow(0 0.4rem 0.7rem rgb(0 0 0 / 0.28));
     transition: transform 0.35s var(--ca-ease-out);
 }
 
-.ca-mascot > .bs-avatar {
+.ca-roam__body > .bs-avatar {
     width: 100%;
     height: 100%;
 }
 
-.ca-mascot:hover {
-    transform: translateY(-0.15rem) scale(1.06);
+.ca-roam__mascot:hover .ca-roam__body {
+    transform: translateY(-0.12rem) scale(1.06);
 }
 
-.ca-mascot:active {
-    transform: scale(0.96);
+/* In flight it leans into the move and squashes a touch. */
+.ca-roam__mascot[data-flying="1"] .ca-roam__body {
+    transform: scale(0.94, 1.06);
 }
 
 /*
- * Below desktop widths the FAQ rows and cards run to the right edge, exactly
- * where the mascot sits, and a fixed element on top of them swallows taps. It
- * becomes decorative-only there: it still animates with the section, but every
- * pointer event passes through to the page underneath.
+ * Speech bubble: the site's own card language. White, hairline border, mono tag,
+ * serif-free body. It pops from the mascot (origin is the tail) and is hidden
+ * outright while the mascot is flying, so a bubble never trails across the page.
  */
-@media (max-width: 1023px) {
-    .ca-mascot {
-        pointer-events: none;
+.ca-roam__bubble {
+    --tail-at: 50%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    box-sizing: border-box;
+    width: 15rem;
+    padding: 0.7rem 0.85rem 0.8rem;
+    border: 1px solid rgb(0 0 0 / 0.14);
+    border-radius: 1rem;
+    background: rgb(255 255 255);
+    color: var(--ca-ink);
+    box-shadow:
+        0 0.9rem 1.6rem -0.9rem rgb(0 0 0 / 0.35),
+        0 0 0 1px rgb(255 255 255 / 0.6) inset;
+    opacity: 0;
+    visibility: hidden;
+    scale: 0.86;
+    transition:
+        opacity 0.22s var(--ca-ease-out),
+        scale 0.3s var(--ca-ease-out),
+        visibility 0s linear 0.22s;
+    pointer-events: none;
+}
+
+.ca-roam__bubble[data-show="1"] {
+    opacity: 1;
+    visibility: visible;
+    scale: 1;
+    transition-delay: 0.12s, 0.12s, 0s;
+}
+
+.ca-roam__bubble[data-tail="l"] { transform-origin: 0 var(--tail-at); }
+.ca-roam__bubble[data-tail="r"] { transform-origin: 100% var(--tail-at); }
+.ca-roam__bubble[data-tail="t"] { transform-origin: var(--tail-at) 0; }
+.ca-roam__bubble[data-tail="b"] { transform-origin: var(--tail-at) 100%; }
+
+.ca-roam__tag {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-family: var(--font-robotomono-ca), ui-monospace, monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    color: var(--ca-sub);
+}
+
+.ca-roam__bubble p {
+    margin: 0;
+    font-size: 0.86rem;
+    line-height: 1.35;
+    text-wrap: pretty;
+}
+
+/* the tail: a rotated square carrying the same border, pointing at the mascot */
+.ca-roam__bubble::after {
+    content: "";
+    position: absolute;
+    width: 0.7rem;
+    height: 0.7rem;
+    background: rgb(255 255 255);
+    border: 1px solid rgb(0 0 0 / 0.14);
+    transform: rotate(45deg);
+}
+
+.ca-roam__bubble[data-tail="l"]::after {
+    left: -0.38rem;
+    top: calc(var(--tail-at) - 0.35rem);
+    border-right: 0;
+    border-top: 0;
+}
+
+.ca-roam__bubble[data-tail="r"]::after {
+    right: -0.38rem;
+    top: calc(var(--tail-at) - 0.35rem);
+    border-left: 0;
+    border-bottom: 0;
+}
+
+.ca-roam__bubble[data-tail="t"]::after {
+    top: -0.38rem;
+    left: calc(var(--tail-at) - 0.35rem);
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.ca-roam__bubble[data-tail="b"]::after {
+    bottom: -0.38rem;
+    left: calc(var(--tail-at) - 0.35rem);
+    border-left: 0;
+    border-top: 0;
+}
+
+@media (max-width: 639px) {
+    .ca-roam__bubble {
+        padding: 0.55rem 0.7rem 0.65rem;
+        border-radius: 0.85rem;
+    }
+
+    .ca-roam__bubble p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ca-roam__bubble,
+    .ca-roam__body {
+        transition-duration: 0.01ms;
+        transition-delay: 0s;
+    }
+
+    .ca-roam__mascot[data-flying="1"] .ca-roam__body {
+        transform: none;
     }
 }
 

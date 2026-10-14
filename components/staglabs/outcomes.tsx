@@ -23,7 +23,7 @@ const STATS = [
 
 export function OutcomesSection() {
     return (
-        <section id="outcomes" className="ca-anchor ca-sec" data-mood="excited">
+        <section id="outcomes" className="ca-anchor ca-sec">
             <CaSectionHead
                 eyebrow="04 · Outcomes"
                 lead="What we"

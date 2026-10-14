@@ -42,7 +42,7 @@ export function FaqSection() {
     }
 
     return (
-        <section id="faq" className="ca-anchor ca-sec" data-mood="thinking">
+        <section id="faq" className="ca-anchor ca-sec">
             <CaSectionHead
                 eyebrow="05 · FAQ"
                 lead="Frequently asked"

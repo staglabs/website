@@ -164,7 +164,7 @@ function SmallCell({ project }: { project: Project }) {
 
 export function WorkSection() {
     return (
-        <section id="work" className="ca-anchor ca-sec" data-mood="curious">
+        <section id="work" className="ca-anchor ca-sec">
             <CaSectionHead
                 eyebrow="01 · Selected work"
                 lead="What the studio has"

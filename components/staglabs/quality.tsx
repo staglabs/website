@@ -107,7 +107,6 @@ export function QualitySection() {
     return (
         <section
             id="quality"
-            data-mood="proud"
             className="ca-anchor ca-sec"
             style={{ background: "#ffffff" }}
         >

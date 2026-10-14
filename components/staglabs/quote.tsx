@@ -2,7 +2,7 @@ import { CaStar, CaWords } from "./primitives";
 
 export function QuoteBand() {
     return (
-        <section className="ca-pc ca-anchor" data-mood="happy">
+        <section className="ca-pc ca-anchor">
             <div className="ca-pc__inner" data-band="night" data-tone="dark">
                 <div className="ca-fill" aria-hidden="true">
                     <img src="/img/sky-night.avif" alt="" loading="lazy" />
