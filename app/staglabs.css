@@ -944,7 +944,7 @@
  */
 .ca-page .ca-hero-start {
     position: relative;
-    width: min(20rem, 82vw);
+    width: min(13rem, 82vw);
     aspect-ratio: 826 / 380;
 }
 
