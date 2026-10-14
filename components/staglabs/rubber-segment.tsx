@@ -206,8 +206,12 @@ export default function RubberSegment({
 
     useEffect(() => {
         if (!drag.current && committed.current !== index) {
+            // The value changed from outside (scroll-spy, route change), not
+            // from a click or drag here. Glide there like a click would, rather
+            // than teleporting. `travel` jumps on its own under reduced motion.
+            const from = committed.current;
             committed.current = index;
-            jumpTo(index);
+            travel(from, index);
         }
     });
 
