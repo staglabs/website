@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { FOUNDERS, personJsonLd } from "@/lib/jsonld";
+import { pageMeta } from "@/lib/seo";
 import { TeamProfile, type TeamMember } from "@/components/staglabs/team-profile";
 
-export const metadata: Metadata = {
-    title: "Chirag Dave — Staglabs",
-    alternates: { canonical: "/about/chirag" },
-    description: "Chirag Dave is a co-founder of Staglabs.",
-};
+export const metadata: Metadata = pageMeta({
+    title: "Chirag Dave | Co-founder, Staglabs",
+    description:
+        "Chirag Dave is co-founder of Staglabs, a product engineering studio. He builds the interfaces, data models and systems behind startup web products.",
+    path: "/about/chirag",
+});
 
 const member: TeamMember = {
     lead: "Chirag",
@@ -33,5 +36,23 @@ const member: TeamMember = {
 };
 
 export default function ChiragPage() {
-    return <TeamProfile member={member} />;
+    return (
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(
+                        personJsonLd({
+                            id: FOUNDERS.chirag.id,
+                            name: FOUNDERS.chirag.name,
+                            path: FOUNDERS.chirag.path,
+                            jobTitle: "Co-founder",
+                            sameAs: [FOUNDERS.chirag.website, ...member.links.map((l) => l.url)],
+                        }),
+                    ),
+                }}
+            />
+            <TeamProfile member={member} />
+        </>
+    );
 }
