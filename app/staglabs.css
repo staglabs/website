@@ -322,6 +322,28 @@
     );
 }
 
+/*
+ * Landing hero only: a lighter night sky. Same monochrome photograph, lifted
+ * in brightness, with a gentler scrim behind the copy. Other cover bands keep
+ * the base `.ca-fill` treatment above.
+ */
+.ca-pc__inner .ca-fill--hero img {
+    filter: grayscale(1) contrast(1.02) brightness(2.1);
+}
+
+.ca-pc__inner .ca-fill--hero::after {
+    background: linear-gradient(
+        180deg,
+        rgb(0 0 0 / 0.04) 0%,
+        rgb(0 0 0 / 0.14) 24%,
+        rgb(0 0 0 / 0.3) 40%,
+        rgb(0 0 0 / 0.3) 62%,
+        rgb(0 0 0 / 0.16) 78%,
+        rgb(0 0 0 / 0.04) 92%,
+        rgb(0 0 0 / 0) 100%
+    );
+}
+
 .ca-page[data-fill="sky"] .ca-pc__inner[data-band="day"] .ca-fill {
     background:
         radial-gradient(120% 55% at 50% 108%, rgb(255 255 255 / 0.75) 0%, rgb(255 255 255 / 0) 55%),
