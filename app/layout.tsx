@@ -11,6 +11,7 @@ import "@/components/threeui/shaders/threeui.css";
 import "@bible-strong/avatar-react/styles.css";
 import "./staglabs.css";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { organizationJsonLd } from "@/lib/jsonld";
 
 const roboto = Roboto({
     subsets: ["latin"],
@@ -26,9 +27,9 @@ const robotoMono = Roboto_Mono({
     display: "swap",
 });
 
-const title = "Staglabs — Software agency built for short runways";
+const title = "Staglabs | MVP & Product Development Agency for Startups";
 const description =
-    "Staglabs is a software agency built for short runways. We build production software in tight, visible increments — fast shipping without skipping the parts that keep it standing.";
+    "Staglabs builds production-ready MVPs, web apps and internal tools for startups in short, visible cycles. Ship fast without cutting corners.";
 
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
@@ -62,8 +63,9 @@ export const metadata: Metadata = {
         "product engineering",
         "web development",
         "internal tools",
-        "short runways",
-        "fast shipping",
+        "MVP development",
+        "startup software development",
+        "Next.js development",
     ],
     authors: [
         { name: "Chirag", url: "https://chirxg.is-a.dev" },
@@ -89,18 +91,7 @@ export default function RootLayout({
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
-                        __html: JSON.stringify({
-                            "@context": "https://schema.org",
-                            "@type": "ProfessionalService",
-                            name: SITE_NAME,
-                            url: SITE_URL,
-                            description,
-                            logo: `${SITE_URL}/staglabs-mark.png`,
-                            founder: [
-                                { "@type": "Person", name: "Chirag Dave", url: "https://chirxg.is-a.dev" },
-                                { "@type": "Person", name: "Ishan Patra", url: "https://ishanpatra.com" },
-                            ],
-                        }),
+                        __html: JSON.stringify(organizationJsonLd()),
                     }}
                 />
                 {children}

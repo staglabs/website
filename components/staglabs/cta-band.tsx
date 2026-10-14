@@ -133,7 +133,7 @@ export function CtaBand() {
                             </h2>
 
                             <div className="ca-siv mt-9 flex flex-wrap items-center justify-center gap-3">
-                                <CaCta href="/about" tone="dark">
+                                <CaCta href="/contact" tone="dark">
                                     Start a project
                                 </CaCta>
                                 <CaCta href="/#method">How we ship</CaCta>

@@ -13,6 +13,7 @@ const PAGES = [
 
 const TEAM = [
     { label: "About Staglabs", href: "/about" },
+    { label: "Contact", href: "/contact" },
     { label: "Chirag Dave", href: "/about/chirag" },
     { label: "Ishan Patra", href: "/about/ishan" },
 ];
@@ -45,7 +46,7 @@ export function SiteFooter() {
                         </p>
 
                         <div className="mt-7">
-                            <CaCta href="/about" tone="dark">
+                            <CaCta href="/contact" tone="dark">
                                 Start a project
                             </CaCta>
                         </div>

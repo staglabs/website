@@ -16,7 +16,11 @@ const NAV_LINKS = [
     { label: "FAQ", href: "/#faq" },
 ];
 
-const MOBILE_LINKS = [...NAV_LINKS, { label: "About", href: "/about" }];
+const MOBILE_LINKS = [
+    ...NAV_LINKS,
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
+];
 
 const SECTION_IDS = NAV_LINKS.map((link) => link.href.split("#")[1]);
 
@@ -208,7 +212,7 @@ export function SiteNav() {
                             </span>
 
                             <span className="ca-nav__cta">
-                                <CaCta href="/about" tone="dark">
+                                <CaCta href="/contact" tone="dark">
                                     Start a project
                                 </CaCta>
                             </span>
@@ -282,7 +286,7 @@ export function SiteNav() {
                     </nav>
 
                     <div className="mt-auto pt-10">
-                        <CaCta href="/about" tone="light">
+                        <CaCta href="/contact" tone="light">
                             Start a project
                         </CaCta>
                     </div>

@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { pageMeta } from "@/lib/seo";
 import { CaCta, CaSectionHead } from "@/components/staglabs/primitives";
 import { PageHero, PageShell } from "@/components/staglabs/page-shell";
 import { ArrowUpRight } from "@/components/staglabs/icons";
 
-export const metadata: Metadata = {
-    title: "About — Staglabs",
-    alternates: { canonical: "/about" },
+export const metadata: Metadata = pageMeta({
+    title: "About Staglabs | A Two-Person Product Engineering Studio",
     description:
-        "Staglabs is a software studio that designs, builds, and ships web products fast.",
-};
+        "Staglabs is a two-person software studio. Meet the founders and see how small scope, short cycles and working software keep startup builds on track.",
+    path: "/about",
+});
 
 const PRINCIPLES = [
     {
@@ -136,7 +137,7 @@ export default function AboutPage() {
                     <p className="ca-label" style={{ color: "var(--ca-sub)" }}>
                         START A PROJECT
                     </p>
-                    <CaCta href="/#outcomes" tone="dark">
+                    <CaCta href="/contact" tone="dark">
                         Start a project
                     </CaCta>
                 </div>

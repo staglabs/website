@@ -131,7 +131,7 @@ export function OutcomesSection() {
                                 cycle would look like.
                             </p>
                             <div className="mt-8">
-                                <CaCta href="/about" tone="dark">
+                                <CaCta href="/contact" tone="dark">
                                     Start a project
                                 </CaCta>
                             </div>
