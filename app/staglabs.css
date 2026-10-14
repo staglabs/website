@@ -985,7 +985,11 @@
     aspect-ratio: 1;
     display: grid;
     cursor: pointer;
-    filter: drop-shadow(0 0.4rem 0.7rem rgb(0 0 0 / 0.28));
+    /* A hairline edge first, then the soft contact shadow. The chrome body is
+       only about 1.7:1 against white, so without the edge it dissolves into the
+       light sections. */
+    filter: drop-shadow(0 0 0.6px rgb(0 0 0 / 0.55))
+        drop-shadow(0 0.4rem 0.7rem rgb(0 0 0 / 0.28));
     transition: transform 0.35s var(--ca-ease-out);
 }
 
