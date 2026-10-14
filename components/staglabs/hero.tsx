@@ -6,7 +6,7 @@ export function Hero() {
         <header id="top" className="ca-anchor">
             <section className="ca-pc ca-anchor">
                 <div className="ca-pc__inner" data-band="night" data-tone="dark">
-                    <div className="ca-fill" aria-hidden="true">
+                    <div className="ca-fill ca-fill--hero" aria-hidden="true">
                         <img
                             src="/img/sky-night.avif"
                             alt=""

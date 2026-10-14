@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@bible-strong/avatar-react": "0.1.0",
     "@react-three/drei": "^10.3.0",
     "@react-three/fiber": "^9.1.2",
     "@tabler/icons-react": "^3.34.0",

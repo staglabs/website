@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { CaEyebrow, CaWords } from "./primitives";
+import { MascotLoader } from "@/components/avatar/mascot-loader";
 import { ScrollMotion } from "./scroll-motion";
 import { ScrollReveal } from "./scroll-reveal";
 import { SiteFooter } from "./site-footer";
@@ -29,6 +30,7 @@ export function PageShell({ children }: { children: ReactNode }) {
                 <main id="main">{children}</main>
 
                 <SiteFooter />
+                <MascotLoader />
             </div>
         </SmoothScroll>
     );

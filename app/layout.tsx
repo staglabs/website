@@ -8,6 +8,7 @@ import "./globals.css";
 import "@/components/staglabs/particle-text.css";
 import "@/components/staglabs/rubber-segment.css";
 import "@/components/threeui/shaders/threeui.css";
+import "@bible-strong/avatar-react/styles.css";
 import "./staglabs.css";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
