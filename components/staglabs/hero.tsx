@@ -1,19 +1,44 @@
+import ReactDOM from "react-dom";
 import { HeroStartButton } from "./hero-start-button";
 import { CaCta, CaWords } from "./primitives";
 
 export function Hero() {
+    // Preload the candidate the <picture> will pick (per breakpoint), so the LCP
+    // image fetch starts from the document head instead of the body.
+    ReactDOM.preload("/img/sky-night-mobile.avif", {
+        as: "image",
+        type: "image/avif",
+        fetchPriority: "high",
+        media: "(max-width: 767px)",
+    });
+    ReactDOM.preload("/img/sky-night.avif", {
+        as: "image",
+        type: "image/avif",
+        fetchPriority: "high",
+        media: "(min-width: 768px)",
+    });
+
     return (
         <header id="top" className="ca-anchor">
             <section className="ca-pc ca-anchor">
                 <div className="ca-pc__inner" data-band="night" data-tone="dark">
                     <div className="ca-fill ca-fill--hero" aria-hidden="true">
-                        <img
-                            src="/img/sky-night.avif"
-                            alt=""
-                            loading="eager"
-                            fetchPriority="high"
-                            decoding="async"
-                        />
+                        <picture>
+                            {/* Phones get a centred portrait crop (cover shows the same
+                                middle of the sky) instead of the full 1536px frame. */}
+                            <source
+                                media="(max-width: 767px)"
+                                srcSet="/img/sky-night-mobile.avif"
+                                type="image/avif"
+                            />
+                            <img
+                                src="/img/sky-night.avif"
+                                alt=""
+                                loading="eager"
+                                fetchPriority="high"
+                                decoding="async"
+                            />
+                        </picture>
                     </div>
 
                     <div className="ca-hero-content relative z-10">
