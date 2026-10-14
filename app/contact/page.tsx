@@ -8,7 +8,7 @@ import { ContactForm } from "./contact-form";
 export const metadata: Metadata = pageMeta({
     title: "Contact Staglabs | Start Your MVP or Product Build",
     description:
-        "Tell Staglabs what you are building. Send a short brief and a founder replies by email to scope your MVP, web app or internal tool.",
+        "Tell Staglabs what you are building. Send a short brief and a founder replies by email to scope your MVP, web app or internal tool for your startup.",
     path: "/contact",
 });
 
