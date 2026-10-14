@@ -1,155 +1,89 @@
-# NGMI (Not Gonna Make It)
+# Staglabs
 
-NGMI is a platform dedicated to helping students and professionals navigate the challenging landscape of tech careers. Our mission is to transform the "Not Gonna Make It" mindset into "Actually Made It" through AI-powered tools, resources, and community support.
+Marketing site for Staglabs, a software agency built for short runways.
+Editorial, monochrome, motion-led. Next.js 15 (App Router), React 19,
+Tailwind v4, Framer Motion, Lenis smooth scroll.
 
-## Table of Contents
+## Routes
 
--   [About](#about)
--   [Features](#features)
--   [Project Structure](#project-structure)
--   [Getting Started](#getting-started)
--   [Scripts](#scripts)
--   [Dependencies](#dependencies)
--   [Contributing](#contributing)
--   [Contact](#contact)
--   [License](#license)
+| Route | Purpose |
+| --- | --- |
+| `/` | Landing page: hero, work, method, quality, quote, outcomes, FAQ, CTA |
+| `/about` | Studio principles and team |
+| `/about/chirag`, `/about/ishan` | Founder profiles |
+| `/robots.txt`, `/sitemap.xml` | Generated from `lib/site.ts` |
+| `/opengraph-image`, `/icon.png` | Social card and favicon |
 
----
-
-## About
-
-NGMI (Not Gonna Make It) is a platform designed to empower users in their tech career journeys. We believe that with the right tools and guidance, everyone can overcome career obstacles and achieve their professional goals. Our AI-powered platform provides personalized insights and recommendations to help you make informed decisions about your career path.
-
-**Vision:**  
-Transforming "Not Gonna Make It" into "Actually Made It" for everyone in tech.
-
-**Team:**  
-Founded by tech professionals with experience in AI, career development, and educational technology.
-
----
-
-## Features
-
--   **Placement Predictor:**  
-    An AI-based tool that analyzes coding profiles to predict placement success, eligibility, and salary range.  
-    [Try it here](https://placements.ngmi.club)
-
--   **Upcoming Tools:**
-
-    -   AI Resume Analyzer
-    -   Internship Radar
-    -   Company Culture Detector
-
--   **Modern UI:**
-    -   Floating Dock navigation
-    -   Animated backgrounds and effects
-    -   Responsive design
-
----
-
-## Project Structure
-
-```
-ngmi/
-  app/                # Next.js app directory (pages, layout, styles)
-  components/         # Reusable React components (UI, navigation, effects)
-  lib/                # Utility functions
-  public/             # Static assets (SVGs, images)
-  styles/             # Global and component styles (Tailwind CSS)
-  package.json        # Project metadata and scripts
-  tsconfig.json       # TypeScript configuration
-```
-
----
-
-## Getting Started
-
-### Prerequisites
-
--   Node.js (v18+ recommended)
--   npm, yarn, pnpm, or bun
-
-### Installation
-
-1. Clone the repository:
-
-    ```bash
-    git clone https://github.com/yourusername/ngmi.git
-    cd ngmi
-    ```
-
-2. Install dependencies:
-    ```bash
-    npm install
-    # or
-    yarn
-    # or
-    pnpm install
-    # or
-    bun install
-    ```
-
-### Running the Development Server
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build && npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
+## Structure
 
----
+```
+app/                  routes, layout, global CSS, staglabs.css (design system)
+components/staglabs/  one component per section, plus primitives and icons
+components/threeui/   vendored ThreeUI Get Started button (unmodified)
+lib/site.ts           canonical URL, site name, sitemap routes
+public/img/           cover imagery (AVIF), sky-night hero cover
+DESIGN.md             design system: tokens, type scale, motion, section order
+```
 
-## Scripts
+See [DESIGN.md](./DESIGN.md) before changing visuals.
 
--   `dev` – Start the development server with Turbopack
--   `build` – Build the production app
--   `start` – Start the production server
--   `lint` – Run ESLint
+## Configuration
 
----
+`NEXT_PUBLIC_SITE_URL` sets the canonical origin used for metadata, the
+sitemap, robots and JSON-LD. Set it at **build time** once the production
+domain is live. It defaults to the current sslip.io deployment.
 
-## Dependencies
+## Conventions
 
--   [Next.js](https://nextjs.org/) (v15+)
--   [React](https://react.dev/) (v19+)
--   [Framer Motion](https://www.framer.com/motion/)
--   [Three.js](https://threejs.org/)
--   [Tailwind CSS](https://tailwindcss.com/)
--   [Lucide React](https://lucide.dev/)
--   [@react-three/fiber](https://docs.pmnd.rs/react-three-fiber/getting-started/introduction)
--   [@tabler/icons-react](https://tabler.io/icons)
--   [TypeScript](https://www.typescriptlang.org/)
+- Icons are inline SVG (`components/staglabs/icons.tsx`). Do not use text
+  glyphs such as arrows or check marks, they render as boxes without a
+  symbol font.
+- Respect `prefers-reduced-motion`. Content must never depend on an animation
+  running.
+- Copy stays Staglabs' own. No invented client metrics or timelines.
 
-See `package.json` for the full list.
+## ThreeUI Get Started button
 
----
+The hero "Start a project" control is ThreeUI's `GetStartedButton`. Its three
+registered files live unmodified in `components/threeui/` (SHA-256 identical to
+the published bundle at `threeui.com/source-code/get-started-button.json`).
+Everything this project changes is in two strict build-time loaders, so an
+upstream update that moves any adapted token fails the build instead of
+silently shipping:
 
-## Contributing
+- `lib/threeui-source-loader.js`: transparent background, "START" label, the
+  frame size contract, and a click bridge (the button runs in a sandboxed
+  iframe that cannot navigate the page).
+- `lib/threeui-css-loader.js`: drops one `@font-face` for a font file the
+  bundle does not ship.
+- `components/staglabs/hero-start-button.tsx` receives the click and routes to
+  `/about`, accepting messages only from its own iframe.
 
-Contributions are welcome! Please open an issue or submit a pull request.
+Limits: the embedded Geist Mono subset contains A-Z only, so the label is
+"START" rather than "Start a project" (15 characters would not fit anyway). The
+button needs WebGL 2 and JavaScript. Without JavaScript a plain link is shown.
 
----
+## Notes
 
-## Contact
+- **Linting:** `npm run lint` runs ESLint with the Next.js core-web-vitals and
+  TypeScript rules (`eslint.config.mjs`). It currently passes with no warnings.
+- **Environment:** the only variable read is the optional
+  `NEXT_PUBLIC_SITE_URL`. `.env*` files are gitignored.
+- **Private and unlicensed.** `package.json` sets `"private": true` and there
+  is no `LICENSE` file.
 
-Have questions or want to collaborate?  
-Email: [contact@ngmi.club](mailto:contact@ngmi.club)
+## Deployment
 
----
+Currently served from a single host behind Caddy:
 
-## License
-
-This project is licensed under the MIT License.
-
----
-
-**Deploy on Vercel:**  
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- systemd unit `staglabs-website` runs `next start` on port 3002 and restarts
+  on failure.
+- Rebuild and restart with `redeploy.sh` (kept alongside the repo).

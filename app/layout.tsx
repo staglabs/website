@@ -1,66 +1,80 @@
-import { SharedNavbar } from "@/components/ui/shared-navbar";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto, Roboto_Mono } from "next/font/google";
 import "./globals.css";
+/* Component stylesheets are imported here rather than from the components
+   themselves: this project's bundler does not pick up plain CSS imported by a
+   client component, so the rules never reached the page. Order matters —
+   staglabs.css comes last so its theme overrides win. */
+import "@/components/staglabs/particle-text.css";
+import "@/components/staglabs/rubber-segment.css";
+import "@/components/threeui/shaders/threeui.css";
+import "./staglabs.css";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
-const geistSans = Geist({
-    variable: "--font-geist-sans",
+const roboto = Roboto({
     subsets: ["latin"],
+    weight: ["300", "400", "500", "700"],
+    variable: "--font-roboto-ca",
+    display: "swap",
 });
 
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
+const robotoMono = Roboto_Mono({
     subsets: ["latin"],
+    weight: ["400", "500"],
+    variable: "--font-robotomono-ca",
+    display: "swap",
 });
+
+const title = "Staglabs — Software agency built for short runways";
+const description =
+    "Staglabs is a software agency built for short runways. We build production software in tight, visible increments — fast shipping without skipping the parts that keep it standing.";
 
 export const metadata: Metadata = {
-    title: "NGMI - Not Gonna Make It",
-    description: "Not Gonna Make It — until you actually do.",
+    metadataBase: new URL(SITE_URL),
+    title: { default: title, template: "%s" },
+    description,
     icons: {
-        icon: "/N.svg",
+        icon: [{ url: "/icon.png", type: "image/png" }],
+        apple: [{ url: "/icon.png", type: "image/png" }],
     },
     openGraph: {
-        images: [
-            {
-                url: "/og-image.png",
-            },
-        ],
-        title: "NGMI - Not Gonna Make It",
-        description: "Not Gonna Make It — until you actually do.",
-        url: "https://ngmi.club",
-        siteName: "NGMI",
+        title,
+        description,
+        siteName: SITE_NAME,
+        url: SITE_URL,
         locale: "en_US",
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
-        title: "NGMI - Not Gonna Make It",
-        description: "Not Gonna Make It — until you actually do.",
-        images: ["/og-image.png"],
-    },
-    alternates: {
-        canonical: "https://ngmi.club",
+        title,
+        description,
     },
     robots: {
         index: true,
         follow: true,
     },
-    manifest: "/manifest.json",
     category: "technology",
-    keywords: ["NGMI", "Not Gonna Make It", "AI", "Career", "Education"],
+    keywords: [
+        "Staglabs",
+        "software agency",
+        "product engineering",
+        "web development",
+        "internal tools",
+        "short runways",
+        "fast shipping",
+    ],
     authors: [
         { name: "Chirag", url: "https://chirxg.is-a.dev" },
         { name: "Ishan", url: "https://ishanpatra.com" },
     ],
     creator: "Chirag",
-    publisher: "Chirag",
+    publisher: "Staglabs",
     formatDetection: {
         email: false,
         address: false,
         telephone: false,
     },
-    metadataBase: new URL("https://ngmi.club"),
 };
 
 export default function RootLayout({
@@ -69,20 +83,26 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className="dark">
-            <body
-                className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-black text-white antialiased`}
-            >
-                <SharedNavbar />
-                <div className="hidden sm:block">
-
-                <SmoothCursor />
-                </div>
+        <html lang="en">
+            <body className={`${roboto.variable} ${robotoMono.variable} antialiased`}>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "ProfessionalService",
+                            name: SITE_NAME,
+                            url: SITE_URL,
+                            description,
+                            logo: `${SITE_URL}/staglabs-mark.png`,
+                            founder: [
+                                { "@type": "Person", name: "Chirag Dave", url: "https://chirxg.is-a.dev" },
+                                { "@type": "Person", name: "Ishan Patra", url: "https://ishanpatra.com" },
+                            ],
+                        }),
+                    }}
+                />
                 {children}
-                {/* Footer */}
-                <footer className="mt-32 border-t border-white/10 text-sm text-center py-6 text-white/50 relative z-10">
-                            &copy; 2025 NGMI. Built by the NGMI team.
-                </footer>
             </body>
         </html>
     );
