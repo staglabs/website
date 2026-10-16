@@ -134,43 +134,41 @@
     }
 }
 
+/*
+ * Phones (<= 767px): fluid type. Each size is a straight line from its value at
+ * 320px up to its old 767px value, so nothing jumps at a breakpoint and the
+ * scale never overruns a 320-414px screen. Tracking moves to em so it shrinks
+ * with the type instead of staying at the desktop rem value.
+ *
+ *              320px     375px     414px     767px
+ *   h1/stat    36px      38px      39px      52px
+ *   h2         30px      32px      34px      48px
+ *   h3         26px      28px      30px      44px
+ *   h4         24px      26px      27px      40px
+ *   h5         22px      23px      24px      32px
+ *   h6         22px      23px      24px      32px
+ */
 @media (max-width: 767px) {
     .ca-h1,
     .ca-stat {
-        font-size: 3.25rem;
+        letter-spacing: -0.03em;
+        font-size: clamp(2.25rem, 1.53rem + 3.58vw, 3.25rem);
     }
     .ca-h2 {
-        font-size: 3rem;
+        letter-spacing: -0.03em;
+        font-size: clamp(1.875rem, 1.07rem + 4.03vw, 3rem);
     }
     .ca-h3 {
-        font-size: 2.75rem;
+        font-size: clamp(1.625rem, 0.82rem + 4.03vw, 2.75rem);
     }
     .ca-h4 {
-        font-size: 2.5rem;
+        font-size: clamp(1.5rem, 0.785rem + 3.58vw, 2.5rem);
     }
     .ca-h5 {
-        font-size: 2rem;
+        font-size: clamp(1.375rem, 0.93rem + 2.24vw, 2rem);
     }
-}
-
-@media (max-width: 479px) {
-    .ca-h1,
-    .ca-stat {
-        letter-spacing: -0.12rem;
-        font-size: 3rem;
-    }
-    .ca-h2 {
-        letter-spacing: -0.1rem;
-        font-size: 2.5rem;
-    }
-    .ca-h3 {
-        font-size: 2.5rem;
-    }
-    .ca-h4 {
-        font-size: 2rem;
-    }
-    .ca-h5 {
-        font-size: 1.75rem;
+    .ca-h6 {
+        font-size: clamp(1.375rem, 0.927rem + 2.24vw, 2rem);
     }
 }
 
